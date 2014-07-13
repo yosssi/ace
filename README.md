@@ -1,4 +1,1 @@
-ace
-===
-
-HTML template engine for Go
+# Ace - HTML template engine for Go
