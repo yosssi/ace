@@ -50,7 +50,7 @@ func readFile(path string, opts *Options) (*file, error) {
 		return nil, err
 	}
 
-	return newFile(path, data), nil
+	return NewFile(path, data), nil
 }
 
 // findIncludes finds and adds include files.

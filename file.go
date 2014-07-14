@@ -6,8 +6,8 @@ type file struct {
 	data []byte
 }
 
-// newFile creates and returns a file.
-func newFile(path string, data []byte) *file {
+// NewFile creates and returns a file.
+func NewFile(path string, data []byte) *file {
 	return &file{
 		path: path,
 		data: data,
