@@ -77,8 +77,8 @@ func findIncludes(data []byte, opts *Options, includes *[]*file) error {
 func findIncludePaths(data []byte) []string {
 	var includePaths []string
 
-	for _, line := range strings.Split(formatLF(string(data)), LF) {
-		if includePath := findIncludePath(line); includePath != "" {
+	for _, l := range strings.Split(formatLF(string(data)), LF) {
+		if includePath := findIncludePath(l); includePath != "" {
 			includePaths = append(includePaths, includePath)
 		}
 	}
