@@ -12,7 +12,7 @@ func ParseFiles(bathPath, innerPath string, opts *Options) (*template.Template, 
 		return nil, err
 	}
 
-	Parse(src)
+	parseSource(src)
 
 	return nil, nil
 }

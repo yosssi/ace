@@ -10,7 +10,12 @@ const (
 	helperInclude = "include"
 )
 
-// Parse parses the source and returns the result.
-func Parse(src *source) {
+// parseSource parses the source and returns the result.
+func parseSource(src *source) *result {
+	return nil
+}
 
+// parseBytes parses the byte data and returns the elements.
+func parseBytes(data []byte) []element {
+	return nil
 }
