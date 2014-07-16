@@ -45,11 +45,11 @@ func parseBytes(data []byte) []element {
 		i++
 
 		// Ignore the empty line.
-		if ln.empty() {
+		if ln.isEmpty() {
 			continue
 		}
 
-		if ln.topIndent() {
+		if ln.isTopIndent() {
 		}
 	}
 

@@ -5,13 +5,14 @@ import (
 	"strings"
 )
 
-// Line feed characters and spaces
+// Special characters
 const (
 	CR   = "\r"
 	LF   = "\n"
 	CRLF = "\r\n"
 
 	SPACE = " "
+	EQUAL = "="
 )
 
 // readFiles reads files and returns source for the parsing process.
