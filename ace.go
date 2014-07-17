@@ -1,6 +1,9 @@
 package ace
 
-import "html/template"
+import (
+	"fmt"
+	"html/template"
+)
 
 // ParseFiles parses template files and returns an HTML template.
 func ParseFiles(bathPath, innerPath string, opts *Options) (*template.Template, error) {
@@ -12,7 +15,9 @@ func ParseFiles(bathPath, innerPath string, opts *Options) (*template.Template, 
 		return nil, err
 	}
 
-	parseSource(src)
+	rslt := parseSource(src)
+
+	fmt.Printf("%+v\n", rslt.base[0])
 
 	return nil, nil
 }

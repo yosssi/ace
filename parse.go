@@ -14,15 +14,17 @@ const (
 
 // parseSource parses the source and returns the result.
 func parseSource(src *source) *result {
-	parseBytes(src.base.data)
+	base := parseBytes(src.base.data)
 
-	parseBytes(src.inner.data)
+	inner := parseBytes(src.inner.data)
+
+	includes := make(map[string][]element)
 
 	for _, f := range src.includes {
-		parseBytes(f.data)
+		includes[f.path] = parseBytes(f.data)
 	}
 
-	return nil
+	return newResult(base, inner, includes)
 }
 
 // parseBytes parses the byte data and returns the elements.
@@ -50,6 +52,8 @@ func parseBytes(data []byte) []element {
 		}
 
 		if ln.isTopIndent() {
+			e := newElement(ln)
+			elements = append(elements, e)
 		}
 	}
 

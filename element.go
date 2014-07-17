@@ -5,5 +5,9 @@ type element interface{}
 
 // newElement creates and returns an element.
 func newElement(ln *line) element {
+	switch {
+	case ln.isDoctypeHelperMethod():
+		return newDoctypeHelperMethod(ln)
+	}
 	return nil
 }
