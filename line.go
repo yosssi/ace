@@ -8,6 +8,7 @@ const indentTop = 0
 
 const (
 	strDoctypeHelperMethod = "doctype"
+	strYieldHelperMethod   = "yield"
 )
 
 // line represents a line of codes.
@@ -37,6 +38,12 @@ func (l *line) isHelperMethod() bool {
 // a doctype helper method.
 func (l *line) isDoctypeHelperMethod() bool {
 	return l.isHelperMethod() && len(l.tokens) > 1 && l.tokens[1] == strDoctypeHelperMethod
+}
+
+// isYieldHelperMethod returns true if the line is
+// a yield helper method.
+func (l *line) isYieldHelperMethod() bool {
+	return l.isHelperMethod() && len(l.tokens) > 1 && l.tokens[1] == strYieldHelperMethod
 }
 
 // newLine creates and returns a line.
