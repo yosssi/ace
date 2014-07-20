@@ -14,7 +14,10 @@ func ParseFiles(bathPath, innerPath string, opts *Options) (*template.Template, 
 	}
 
 	// Parse the source.
-	rslt := parseSource(src, opts)
+	rslt, err := parseSource(src, opts)
+	if err != nil {
+		return nil, err
+	}
 
 	// Compile the parsed result.
 	return compileResult(bathPath+":"+innerPath, rslt, opts)

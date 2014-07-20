@@ -3,26 +3,35 @@ package ace
 import "strings"
 
 // parseSource parses the source and returns the result.
-func parseSource(src *source, opts *Options) *result {
+func parseSource(src *source, opts *Options) (*result, error) {
 	var rslt *result
 
-	base := parseBytes(src.base.data, rslt, opts)
+	base, err := parseBytes(src.base.data, rslt, opts)
+	if err != nil {
+		return nil, err
+	}
 
-	inner := parseBytes(src.inner.data, rslt, opts)
+	inner, err := parseBytes(src.inner.data, rslt, opts)
+	if err != nil {
+		return nil, err
+	}
 
 	includes := make(map[string][]element)
 
 	for _, f := range src.includes {
-		includes[f.path] = parseBytes(f.data, rslt, opts)
+		includes[f.path], err = parseBytes(f.data, rslt, opts)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	rslt = newResult(base, inner, includes)
 
-	return rslt
+	return rslt, nil
 }
 
 // parseBytes parses the byte data and returns the elements.
-func parseBytes(data []byte, rslt *result, opts *Options) []element {
+func parseBytes(data []byte, rslt *result, opts *Options) ([]element, error) {
 	var elements []element
 
 	lines := strings.Split(formatLF(string(data)), lf)
@@ -46,11 +55,14 @@ func parseBytes(data []byte, rslt *result, opts *Options) []element {
 		}
 
 		if ln.isTopIndent() {
-			e := newElement(ln, rslt, nil)
+			e, err := newElement(ln, rslt, nil)
+			if err != nil {
+				return nil, err
+			}
 
 			elements = append(elements, e)
 		}
 	}
 
-	return elements
+	return elements, nil
 }

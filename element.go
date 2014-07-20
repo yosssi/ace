@@ -18,8 +18,9 @@ type element interface {
 }
 
 // newElement creates and returns an element.
-func newElement(ln *line, rslt *result, parent element) element {
+func newElement(ln *line, rslt *result, parent element) (element, error) {
 	var e element
+	var err error
 
 	switch {
 	case isPlainTextInner(parent):
@@ -35,7 +36,7 @@ func newElement(ln *line, rslt *result, parent element) element {
 		case ln.isHelperMethodOf(helperMethodNameCSS):
 			e = newHelperMethodCSS(ln, rslt, parent)
 		case ln.isHelperMethodOf(helperMethodNameDoctype):
-			e = newHelperMethodDoctype(ln, rslt, parent)
+			e, err = newHelperMethodDoctype(ln, rslt, parent)
 		case ln.isHelperMethodOf(helperMethodNameInclude):
 			e = newHelperMethodInclude(ln, rslt, parent)
 		case ln.isHelperMethodOf(helperMethodNameJavascript):
@@ -49,7 +50,7 @@ func newElement(ln *line, rslt *result, parent element) element {
 		e = newHTMLTag(ln, rslt, parent)
 	}
 
-	return e
+	return e, err
 }
 
 // isPlainTextInner returns true if the element is a plain text inner.

@@ -2,6 +2,7 @@ package ace
 
 import (
 	"bytes"
+	"fmt"
 	"html/template"
 )
 
@@ -16,6 +17,8 @@ func compileResult(name string, rslt *result, opts *Options) (*template.Template
 			return nil, err
 		}
 	}
+
+	fmt.Println(b.String())
 
 	// Create a template.
 	t := template.New(name)
