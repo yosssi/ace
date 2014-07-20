@@ -78,24 +78,15 @@ func findIncludes(data []byte, opts *Options, includes *[]*file) error {
 func findIncludePaths(data []byte) []string {
 	var includePaths []string
 
-	for _, l := range strings.Split(formatLF(string(data)), LF) {
-		if includePath := findIncludePath(l); includePath != "" {
-			includePaths = append(includePaths, includePath)
+	for i, str := range strings.Split(formatLF(string(data)), LF) {
+		ln := newLine(i, str)
+
+		if ln.isHelperMethodOf(helperMethodNameInclude) {
+			includePaths = append(includePaths, ln.tokens[2])
 		}
 	}
 
 	return includePaths
-}
-
-// findIncludePath finds and returns an include path.
-func findIncludePath(line string) string {
-	tokens := strings.Split(strings.TrimSpace(line), SPACE)
-
-	if len(tokens) < 3 || tokens[0] != prefixHelper || tokens[1] != helperInclude {
-		return ""
-	}
-
-	return tokens[2]
 }
 
 // formatLF replaces the line feed codes with LF and returns the result.

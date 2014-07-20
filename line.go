@@ -6,11 +6,6 @@ const unicodeSpace = 32
 
 const indentTop = 0
 
-const (
-	strDoctypeHelperMethod = "doctype"
-	strYieldHelperMethod   = "yield"
-)
-
 // line represents a line of codes.
 type line struct {
 	no     int
@@ -31,19 +26,12 @@ func (l *line) isTopIndent() bool {
 
 // isHelperMethod returns true if the line is a helper method.
 func (l *line) isHelperMethod() bool {
-	return len(l.tokens) > 0 && l.tokens[0] == EQUAL
+	return len(l.tokens) > 1 && l.tokens[0] == EQUAL
 }
 
-// isDoctypeHelperMethod returns true if the line is
-// a doctype helper method.
-func (l *line) isDoctypeHelperMethod() bool {
-	return l.isHelperMethod() && len(l.tokens) > 1 && l.tokens[1] == strDoctypeHelperMethod
-}
-
-// isYieldHelperMethod returns true if the line is
-// a yield helper method.
-func (l *line) isYieldHelperMethod() bool {
-	return l.isHelperMethod() && len(l.tokens) > 1 && l.tokens[1] == strYieldHelperMethod
+// isHelperMethodOf returns true if the line is a specified helper method.
+func (l *line) isHelperMethodOf(name string) bool {
+	return l.isHelperMethod() && l.tokens[1] == name
 }
 
 // newLine creates and returns a line.

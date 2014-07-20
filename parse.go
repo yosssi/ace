@@ -2,33 +2,27 @@ package ace
 
 import "strings"
 
-// Prefixes of a line
-const (
-	prefixHelper = "="
-)
-
-// Helpers
-const (
-	helperInclude = "include"
-)
-
 // parseSource parses the source and returns the result.
-func parseSource(src *source) *result {
-	base := parseBytes(src.base.data)
+func parseSource(src *source, opts *Options) *result {
+	var rslt *result
 
-	inner := parseBytes(src.inner.data)
+	base := parseBytes(src.base.data, rslt, opts)
+
+	inner := parseBytes(src.inner.data, rslt, opts)
 
 	includes := make(map[string][]element)
 
 	for _, f := range src.includes {
-		includes[f.path] = parseBytes(f.data)
+		includes[f.path] = parseBytes(f.data, rslt, opts)
 	}
 
-	return newResult(base, inner, includes)
+	rslt = newResult(base, inner, includes)
+
+	return rslt
 }
 
 // parseBytes parses the byte data and returns the elements.
-func parseBytes(data []byte) []element {
+func parseBytes(data []byte, rslt *result, opts *Options) []element {
 	var elements []element
 
 	lines := strings.Split(formatLF(string(data)), LF)
@@ -52,7 +46,7 @@ func parseBytes(data []byte) []element {
 		}
 
 		if ln.isTopIndent() {
-			e := newElement(ln)
+			e := newElement(ln, rslt)
 			elements = append(elements, e)
 		}
 	}
