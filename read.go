@@ -7,12 +7,14 @@ import (
 
 // Special characters
 const (
-	CR   = "\r"
-	LF   = "\n"
-	CRLF = "\r\n"
+	cr   = "\r"
+	lf   = "\n"
+	crlf = "\r\n"
 
-	SPACE = " "
-	EQUAL = "="
+	space = " "
+	equal = "="
+	pipe  = "|"
+	slash = "/"
 )
 
 // readFiles reads files and returns source for the parsing process.
@@ -78,7 +80,7 @@ func findIncludes(data []byte, opts *Options, includes *[]*file) error {
 func findIncludePaths(data []byte) []string {
 	var includePaths []string
 
-	for i, str := range strings.Split(formatLF(string(data)), LF) {
+	for i, str := range strings.Split(formatLF(string(data)), lf) {
 		ln := newLine(i, str)
 
 		if ln.isHelperMethodOf(helperMethodNameInclude) {
@@ -91,7 +93,7 @@ func findIncludePaths(data []byte) []string {
 
 // formatLF replaces the line feed codes with LF and returns the result.
 func formatLF(s string) string {
-	return strings.Replace(strings.Replace(s, CRLF, LF, -1), CR, LF, -1)
+	return strings.Replace(strings.Replace(s, crlf, lf, -1), cr, lf, -1)
 }
 
 // hasFile return if files has a file which has the path specified by the parameter.

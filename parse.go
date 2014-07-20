@@ -25,7 +25,7 @@ func parseSource(src *source, opts *Options) *result {
 func parseBytes(data []byte, rslt *result, opts *Options) []element {
 	var elements []element
 
-	lines := strings.Split(formatLF(string(data)), LF)
+	lines := strings.Split(formatLF(string(data)), lf)
 
 	i := 0
 	l := len(lines)
@@ -46,7 +46,8 @@ func parseBytes(data []byte, rslt *result, opts *Options) []element {
 		}
 
 		if ln.isTopIndent() {
-			e := newElement(ln, rslt)
+			e := newElement(ln, rslt, nil)
+
 			elements = append(elements, e)
 		}
 	}

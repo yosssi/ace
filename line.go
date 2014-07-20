@@ -26,12 +26,32 @@ func (l *line) isTopIndent() bool {
 
 // isHelperMethod returns true if the line is a helper method.
 func (l *line) isHelperMethod() bool {
-	return len(l.tokens) > 1 && l.tokens[0] == EQUAL
+	return len(l.tokens) > 1 && l.tokens[0] == equal
 }
 
 // isHelperMethodOf returns true if the line is a specified helper method.
 func (l *line) isHelperMethodOf(name string) bool {
 	return l.isHelperMethod() && l.tokens[1] == name
+}
+
+// isPlainText returns true if the line is a plain text.
+func (l *line) isPlainText() bool {
+	return len(l.tokens) > 0 && l.tokens[0] == pipe
+}
+
+// isComment returns true if the line is a comment.
+func (l *line) isComment() bool {
+	return len(l.tokens) > 0 && l.tokens[0] == slash
+}
+
+// isHTMLComment returns true if the line is an HTML comment.
+func (l *line) isHTMLComment() bool {
+	return len(l.tokens) > 0 && l.tokens[0] == slash+slash
+}
+
+// isConditionalComment returns true if the line is a conditional comment.
+func (l *line) isConditionalComment() bool {
+	return len(l.tokens) > 0 && l.tokens[0] == slash+slash+slash
 }
 
 // newLine creates and returns a line.
@@ -40,7 +60,7 @@ func newLine(no int, str string) *line {
 		no:     no,
 		str:    str,
 		indent: indent(str),
-		tokens: strings.Split(strings.TrimLeft(str, SPACE), SPACE),
+		tokens: strings.Split(strings.TrimLeft(str, space), space),
 	}
 }
 

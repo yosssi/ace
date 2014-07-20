@@ -8,13 +8,13 @@ type helperMethodInclude struct {
 }
 
 // WriteTo writes data to w.
-func (h *helperMethodInclude) WriteTo(w io.Writer) (n int64, err error) {
+func (e *helperMethodInclude) WriteTo(w io.Writer) (int64, error) {
 	return 0, nil
 }
 
 // newHelperMethodInclude creates and returns a helper method include.
-func newHelperMethodInclude(ln *line, rslt *result) *helperMethodInclude {
+func newHelperMethodInclude(ln *line, rslt *result, parent element) *helperMethodInclude {
 	return &helperMethodInclude{
-		elementBase: newElementBase(ln, rslt),
+		elementBase: newElementBase(ln, rslt, parent),
 	}
 }

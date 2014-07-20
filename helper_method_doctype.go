@@ -8,13 +8,13 @@ type helperMethodDoctype struct {
 }
 
 // WriteTo writes data to w.
-func (h *helperMethodDoctype) WriteTo(w io.Writer) (n int64, err error) {
+func (e *helperMethodDoctype) WriteTo(w io.Writer) (int64, error) {
 	return 0, nil
 }
 
 // newHelperMethodDoctype creates and returns a helper method doctype.
-func newHelperMethodDoctype(ln *line, rslt *result) *helperMethodDoctype {
+func newHelperMethodDoctype(ln *line, rslt *result, parent element) *helperMethodDoctype {
 	return &helperMethodDoctype{
-		elementBase: newElementBase(ln, rslt),
+		elementBase: newElementBase(ln, rslt, parent),
 	}
 }

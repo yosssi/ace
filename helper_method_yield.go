@@ -8,13 +8,13 @@ type helperMethodYield struct {
 }
 
 // WriteTo writes data to w.
-func (h *helperMethodYield) WriteTo(w io.Writer) (n int64, err error) {
+func (e *helperMethodYield) WriteTo(w io.Writer) (int64, error) {
 	return 0, nil
 }
 
 // newHelperMethodYield creates and returns a helper method yield.
-func newHelperMethodYield(ln *line, rslt *result) *helperMethodYield {
+func newHelperMethodYield(ln *line, rslt *result, parent element) *helperMethodYield {
 	return &helperMethodYield{
-		elementBase: newElementBase(ln, rslt),
+		elementBase: newElementBase(ln, rslt, parent),
 	}
 }
