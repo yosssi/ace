@@ -20,5 +20,5 @@ func ParseFiles(bathPath, innerPath string, opts *Options) (*template.Template, 
 	}
 
 	// Compile the parsed result.
-	return compileResult(bathPath+":"+innerPath, rslt, opts)
+	return compileResult(bathPath+colon+innerPath, rslt, opts)
 }

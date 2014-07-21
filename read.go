@@ -15,6 +15,9 @@ const (
 	equal = "="
 	pipe  = "|"
 	slash = "/"
+	sharp = "#"
+	dot   = "."
+	colon = ":"
 )
 
 // readFiles reads files and returns source for the parsing process.

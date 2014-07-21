@@ -47,7 +47,7 @@ func newElement(ln *line, rslt *result, parent element) (element, error) {
 	case ln.isPlainText():
 		e = newPlainText(ln, rslt, parent)
 	default:
-		e = newHTMLTag(ln, rslt, parent)
+		e, err = newHTMLTag(ln, rslt, parent)
 	}
 
 	return e, err
