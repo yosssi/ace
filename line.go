@@ -1,6 +1,9 @@
 package ace
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 const unicodeSpace = 32
 
@@ -52,6 +55,31 @@ func (l *line) isHTMLComment() bool {
 // isConditionalComment returns true if the line is a conditional comment.
 func (l *line) isConditionalComment() bool {
 	return len(l.tokens) > 0 && l.tokens[0] == slash+slash+slash
+}
+
+// childOf returns true is the line is a child of the element.
+func (l *line) childOf(parent element) (bool, error) {
+	var ok bool
+	var err error
+
+	switch {
+	case parent.ContainPlainText():
+		switch {
+		case l.isEmpty():
+			ok = true
+		case parent.Base().ln.indent < l.indent:
+			ok = true
+		}
+	default:
+		switch {
+		case l.indent == parent.Base().ln.indent+1:
+			ok = true
+		case l.indent > parent.Base().ln.indent+1:
+			err = fmt.Errorf("the indent is invalid [line: %d]", l.no)
+		}
+	}
+
+	return ok, err
 }
 
 // newLine creates and returns a line.

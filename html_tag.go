@@ -26,10 +26,15 @@ func (e *htmlTag) WriteTo(w io.Writer) (int64, error) {
 	return 0, nil
 }
 
+// ContainPlainText returns the HTML tag's containPlainText field.
+func (e *htmlTag) ContainPlainText() bool {
+	return e.containPlainText
+}
+
 // newHTMLTag creates and returns an HTML tag.
 func newHTMLTag(ln *line, rslt *result, parent element) (*htmlTag, error) {
 	if len(ln.tokens) < 1 {
-		return nil, fmt.Errorf("An HTML tag is not specified [line: %d]", ln.no)
+		return nil, fmt.Errorf("an HTML tag is not specified [line: %d]", ln.no)
 	}
 
 	s := ln.tokens[0]

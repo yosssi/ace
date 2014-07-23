@@ -1,9 +1,13 @@
 package ace
 
-import "io"
+import (
+	"fmt"
+	"io"
+)
 
 // Helper method names
 const (
+	helperMethodNameContent    = "content"
 	helperMethodNameCSS        = "css"
 	helperMethodNameDoctype    = "doctype"
 	helperMethodNameYield      = "yield"
@@ -14,7 +18,10 @@ const (
 // element is an interface for storing an element.
 type element interface {
 	io.WriterTo
-	appendChild(child element)
+	AppendChild(child element)
+	ContainPlainText() bool
+	Base() *elementBase
+	CanHaveChildren() bool
 }
 
 // newElement creates and returns an element.
@@ -23,8 +30,10 @@ func newElement(ln *line, rslt *result, parent element) (element, error) {
 	var err error
 
 	switch {
-	case isPlainTextInner(parent):
+	case parent != nil && parent.ContainPlainText():
 		e = newPlainTextInner(ln, rslt, parent)
+	case ln.isEmpty():
+		e = newEmptyElement(ln, rslt, parent)
 	case ln.isComment():
 		e = newComment(ln, rslt, parent)
 	case ln.isHTMLComment():
@@ -33,6 +42,8 @@ func newElement(ln *line, rslt *result, parent element) (element, error) {
 		e = newConditionalComment(ln, rslt, parent)
 	case ln.isHelperMethod():
 		switch {
+		case ln.isHelperMethodOf(helperMethodNameContent):
+			e = newHelperMethodContent(ln, rslt, parent)
 		case ln.isHelperMethodOf(helperMethodNameCSS):
 			e = newHelperMethodCSS(ln, rslt, parent)
 		case ln.isHelperMethodOf(helperMethodNameDoctype):
@@ -43,6 +54,8 @@ func newElement(ln *line, rslt *result, parent element) (element, error) {
 			e = newHelperMethodJavascript(ln, rslt, parent)
 		case ln.isHelperMethodOf(helperMethodNameYield):
 			e = newHelperMethodYield(ln, rslt, parent)
+		default:
+			err = fmt.Errorf("the helper method name is invalid [line: %d]", ln.no)
 		}
 	case ln.isPlainText():
 		e = newPlainText(ln, rslt, parent)
@@ -51,22 +64,4 @@ func newElement(ln *line, rslt *result, parent element) (element, error) {
 	}
 
 	return e, err
-}
-
-// isPlainTextInner returns true if the element is a plain text inner.
-func isPlainTextInner(parent element) bool {
-	var ok bool
-
-	switch parent.(type) {
-	case *helperMethodCSS:
-		ok = true
-	case *helperMethodJavascript:
-		ok = true
-	case *plainText:
-		ok = true
-	case *htmlTag:
-		ok = parent.(*htmlTag).containPlainText
-	}
-
-	return ok
 }

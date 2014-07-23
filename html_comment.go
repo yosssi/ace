@@ -12,6 +12,11 @@ func (e *htmlComment) WriteTo(w io.Writer) (int64, error) {
 	return 0, nil
 }
 
+// ContainPlainText returns true.
+func (e *htmlComment) ContainPlainText() bool {
+	return true
+}
+
 // newHTMLComment creates and returns an HTML comment.
 func newHTMLComment(ln *line, rslt *result, parent element) *htmlComment {
 	return &htmlComment{

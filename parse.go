@@ -60,9 +60,49 @@ func parseBytes(data []byte, rslt *result, opts *Options) ([]element, error) {
 				return nil, err
 			}
 
+			// Append child elements to the element.
+			if err := appendChildren(e, lines, &i, &l, rslt); err != nil {
+				return nil, err
+			}
+
 			elements = append(elements, e)
 		}
 	}
 
 	return elements, nil
+}
+
+// appendChildren parses the lines and appends the children to the element.
+func appendChildren(parent element, lines []string, i *int, l *int, rslt *result) error {
+	for *i < *l {
+		// Fetch a line.
+		ln := newLine(*i, lines[*i])
+
+		// Check if the line is a child of the parent.
+		ok, err := ln.childOf(parent)
+		if err != nil {
+			return err
+		}
+
+		if !ok {
+			return nil
+		}
+
+		child, err := newElement(ln, rslt, parent)
+		if err != nil {
+			return err
+		}
+
+		parent.AppendChild(child)
+
+		*i++
+
+		if child.CanHaveChildren() {
+			if err := appendChildren(child, lines, i, l, rslt); err != nil {
+				return err
+			}
+		}
+	}
+
+	return nil
 }

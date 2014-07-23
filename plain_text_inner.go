@@ -12,6 +12,11 @@ func (e *plainTextInner) WriteTo(w io.Writer) (int64, error) {
 	return 0, nil
 }
 
+// CanHaveChildren returns false.
+func (e *plainTextInner) CanHaveChildren() bool {
+	return false
+}
+
 // newPlainTextInner creates and returns a plain text.
 func newPlainTextInner(ln *line, rslt *result, parent element) *plainTextInner {
 	return &plainTextInner{
