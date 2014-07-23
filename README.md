@@ -6,9 +6,9 @@
 
 Ace is an HTML template engine for Go. This is inspired by [Slim](http://slim-lang.com/) and [Jade](http://jade-lang.com/). This is a refinement of [Gold](http://gold.yoss.si/).
 
-## Official Information
+## Official Information & Announcement
 
-You can get the official information about Ace via the following channels:
+You can get the official information and announcement about Ace via the following channels:
 
 * [Twitter](https://twitter.com/acehtml)
 * [Google Group](https://groups.google.com/forum/#!forum/acehtml)
