@@ -15,12 +15,10 @@ You can get the official information and announcement about Ace via the followin
 
 ## Discussion & Contact
 
-You can discuss Ace via the following spaces and channels:
+You can discuss Ace and contact the Ace development team via the following channels:
 
 * [GitHub Issues](https://github.com/yosssi/ace/issues)
 * [Google Group](https://groups.google.com/forum/#!forum/acehtml)
 * [Twitter](https://twitter.com/acehtml)
 * [Keiji Yoshida (Author of Ace)'s Twitter](https://twitter.com/_yosssi)
 * [Keiji Yoshida (Author of Ace)'s Email](mailto:yoshida.keiji.84@gmail.com)
-
-You can also contact the Ace development team via the above channels.
