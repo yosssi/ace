@@ -18,8 +18,8 @@ func (e *conditionalComment) ContainPlainText() bool {
 }
 
 // newConditionalComment creates and returns an HTML comment.
-func newConditionalComment(ln *line, rslt *result, parent element) *conditionalComment {
+func newConditionalComment(ln *line, rslt *result, parent element, opts *Options) *conditionalComment {
 	return &conditionalComment{
-		elementBase: newElementBase(ln, rslt, parent),
+		elementBase: newElementBase(ln, rslt, parent, opts),
 	}
 }

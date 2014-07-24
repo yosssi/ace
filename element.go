@@ -25,42 +25,42 @@ type element interface {
 }
 
 // newElement creates and returns an element.
-func newElement(ln *line, rslt *result, parent element) (element, error) {
+func newElement(ln *line, rslt *result, parent element, opts *Options) (element, error) {
 	var e element
 	var err error
 
 	switch {
 	case parent != nil && parent.ContainPlainText():
-		e = newPlainTextInner(ln, rslt, parent)
+		e = newPlainTextInner(ln, rslt, parent, opts)
 	case ln.isEmpty():
-		e = newEmptyElement(ln, rslt, parent)
+		e = newEmptyElement(ln, rslt, parent, opts)
 	case ln.isComment():
-		e = newComment(ln, rslt, parent)
+		e = newComment(ln, rslt, parent, opts)
 	case ln.isHTMLComment():
-		e = newHTMLComment(ln, rslt, parent)
+		e = newHTMLComment(ln, rslt, parent, opts)
 	case ln.isConditionalComment():
-		e = newConditionalComment(ln, rslt, parent)
+		e = newConditionalComment(ln, rslt, parent, opts)
 	case ln.isHelperMethod():
 		switch {
 		case ln.isHelperMethodOf(helperMethodNameContent):
-			e = newHelperMethodContent(ln, rslt, parent)
+			e = newHelperMethodContent(ln, rslt, parent, opts)
 		case ln.isHelperMethodOf(helperMethodNameCSS):
-			e = newHelperMethodCSS(ln, rslt, parent)
+			e = newHelperMethodCSS(ln, rslt, parent, opts)
 		case ln.isHelperMethodOf(helperMethodNameDoctype):
-			e, err = newHelperMethodDoctype(ln, rslt, parent)
+			e, err = newHelperMethodDoctype(ln, rslt, parent, opts)
 		case ln.isHelperMethodOf(helperMethodNameInclude):
-			e = newHelperMethodInclude(ln, rslt, parent)
+			e = newHelperMethodInclude(ln, rslt, parent, opts)
 		case ln.isHelperMethodOf(helperMethodNameJavascript):
-			e = newHelperMethodJavascript(ln, rslt, parent)
+			e = newHelperMethodJavascript(ln, rslt, parent, opts)
 		case ln.isHelperMethodOf(helperMethodNameYield):
-			e = newHelperMethodYield(ln, rslt, parent)
+			e = newHelperMethodYield(ln, rslt, parent, opts)
 		default:
 			err = fmt.Errorf("the helper method name is invalid [line: %d]", ln.no)
 		}
 	case ln.isPlainText():
-		e = newPlainText(ln, rslt, parent)
+		e = newPlainText(ln, rslt, parent, opts)
 	default:
-		e, err = newHTMLTag(ln, rslt, parent)
+		e, err = newHTMLTag(ln, rslt, parent, opts)
 	}
 
 	return e, err

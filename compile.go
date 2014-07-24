@@ -21,7 +21,7 @@ func compileResult(name string, rslt *result, opts *Options) (*template.Template
 	fmt.Println(b.String())
 
 	// Create a template.
-	t := template.New(name)
+	t := template.New(name).Delims(opts.DelimLeft, opts.DelimRight)
 
 	// Parse a string to the template.
 	return t.Parse(b.String())

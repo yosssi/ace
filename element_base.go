@@ -6,6 +6,7 @@ type elementBase struct {
 	rslt     *result
 	parent   element
 	children []element
+	opts     *Options
 }
 
 // AppendChild appends the child element to the element.
@@ -33,10 +34,11 @@ func (e *elementBase) CanHaveChildren() bool {
 }
 
 // newElementBase creates and returns an element base.
-func newElementBase(ln *line, rslt *result, parent element) elementBase {
+func newElementBase(ln *line, rslt *result, parent element, opts *Options) elementBase {
 	return elementBase{
 		ln:     ln,
 		rslt:   rslt,
 		parent: parent,
+		opts:   opts,
 	}
 }

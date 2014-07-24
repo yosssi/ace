@@ -18,8 +18,8 @@ func (e *plainText) ContainPlainText() bool {
 }
 
 // newPlainText creates and returns a plain text.
-func newPlainText(ln *line, rslt *result, parent element) *plainText {
+func newPlainText(ln *line, rslt *result, parent element, opts *Options) *plainText {
 	return &plainText{
-		elementBase: newElementBase(ln, rslt, parent),
+		elementBase: newElementBase(ln, rslt, parent, opts),
 	}
 }

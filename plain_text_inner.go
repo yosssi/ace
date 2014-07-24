@@ -18,8 +18,8 @@ func (e *plainTextInner) CanHaveChildren() bool {
 }
 
 // newPlainTextInner creates and returns a plain text.
-func newPlainTextInner(ln *line, rslt *result, parent element) *plainTextInner {
+func newPlainTextInner(ln *line, rslt *result, parent element, opts *Options) *plainTextInner {
 	return &plainTextInner{
-		elementBase: newElementBase(ln, rslt, parent),
+		elementBase: newElementBase(ln, rslt, parent, opts),
 	}
 }

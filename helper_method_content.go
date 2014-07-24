@@ -13,8 +13,8 @@ func (e *helperMethodContent) WriteTo(w io.Writer) (int64, error) {
 }
 
 // newHelperMethodContent creates and returns a helper method content.
-func newHelperMethodContent(ln *line, rslt *result, parent element) *helperMethodContent {
+func newHelperMethodContent(ln *line, rslt *result, parent element, opts *Options) *helperMethodContent {
 	return &helperMethodContent{
-		elementBase: newElementBase(ln, rslt, parent),
+		elementBase: newElementBase(ln, rslt, parent, opts),
 	}
 }

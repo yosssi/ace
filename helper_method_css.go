@@ -18,8 +18,8 @@ func (e *helperMethodCSS) ContainPlainText() bool {
 }
 
 // helperMethodCSS creates and returns a helper method css.
-func newHelperMethodCSS(ln *line, rslt *result, parent element) *helperMethodCSS {
+func newHelperMethodCSS(ln *line, rslt *result, parent element, opts *Options) *helperMethodCSS {
 	return &helperMethodCSS{
-		elementBase: newElementBase(ln, rslt, parent),
+		elementBase: newElementBase(ln, rslt, parent, opts),
 	}
 }

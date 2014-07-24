@@ -13,8 +13,8 @@ func (e *helperMethodInclude) WriteTo(w io.Writer) (int64, error) {
 }
 
 // newHelperMethodInclude creates and returns a helper method include.
-func newHelperMethodInclude(ln *line, rslt *result, parent element) *helperMethodInclude {
+func newHelperMethodInclude(ln *line, rslt *result, parent element, opts *Options) *helperMethodInclude {
 	return &helperMethodInclude{
-		elementBase: newElementBase(ln, rslt, parent),
+		elementBase: newElementBase(ln, rslt, parent, opts),
 	}
 }

@@ -11,6 +11,12 @@ const (
 	tagNameDiv = "div"
 )
 
+// Attribute names
+const (
+	attributeNameID    = "id"
+	attributeNameClass = "class"
+)
+
 // htmlTag represents an HTML tag.
 type htmlTag struct {
 	elementBase
@@ -18,7 +24,8 @@ type htmlTag struct {
 	id               string
 	classes          []string
 	containPlainText bool
-	attributes       []string
+	attributes       map[string]string
+	textValue        string
 }
 
 // WriteTo writes data to w.
@@ -31,8 +38,76 @@ func (e *htmlTag) ContainPlainText() bool {
 	return e.containPlainText
 }
 
+// setAttributes parses the tokens and set attributes to the element.
+func (e *htmlTag) setAttributes() error {
+	var parsedTokens []string
+	var unclosedTokenValues []string
+	var unclosed bool
+	var closeMark string
+
+	for _, token := range e.ln.tokens {
+		if unclosed {
+			unclosedTokenValues = append(unclosedTokenValues, token)
+
+			if closed(token, closeMark) {
+				parsedTokens = append(parsedTokens, strings.Join(unclosedTokenValues, space))
+				unclosedTokenValues = make([]string, 0)
+				unclosed = false
+			}
+		} else {
+			if unclosed, closeMark = unclosedToken(token, e.opts); unclosed {
+				unclosedTokenValues = append(unclosedTokenValues, token)
+			} else {
+				parsedTokens = append(parsedTokens, token)
+			}
+		}
+	}
+
+	if unclosed {
+		parsedTokens = append(parsedTokens, unclosedTokenValues...)
+	}
+
+	var i int
+	var token string
+
+	// Set attributes to the element.
+	for i, token = range parsedTokens {
+		kv := strings.Split(token, equal)
+
+		if len(kv) < 2 {
+			break
+		}
+
+		k := kv[0]
+		v := kv[1]
+
+		// Remove the prefix and suffix of the double quotes.
+		if len(v) > 1 && strings.HasPrefix(v, doubleQuote) && strings.HasSuffix(v, doubleQuote) {
+			v = v[1 : len(v)-1]
+		}
+
+		switch k {
+		case attributeNameID:
+			if e.id != "" {
+				return fmt.Errorf("multiple IDs are specified [line: %d]", e.ln.no)
+			}
+
+			e.id = v
+		case attributeNameClass:
+			e.classes = append(e.classes, v)
+		default:
+			e.attributes[k] = v
+		}
+	}
+
+	// Set a text value to the element.
+	e.textValue = strings.Join(parsedTokens[i:], space)
+
+	return nil
+}
+
 // newHTMLTag creates and returns an HTML tag.
-func newHTMLTag(ln *line, rslt *result, parent element) (*htmlTag, error) {
+func newHTMLTag(ln *line, rslt *result, parent element, opts *Options) (*htmlTag, error) {
 	if len(ln.tokens) < 1 {
 		return nil, fmt.Errorf("an HTML tag is not specified [line: %d]", ln.no)
 	}
@@ -51,11 +126,15 @@ func newHTMLTag(ln *line, rslt *result, parent element) (*htmlTag, error) {
 	containPlainText := doesContainPlainText(s)
 
 	e := &htmlTag{
-		elementBase:      newElementBase(ln, rslt, parent),
+		elementBase:      newElementBase(ln, rslt, parent, opts),
 		tagName:          tagName,
 		id:               id,
 		classes:          classes,
 		containPlainText: containPlainText,
+	}
+
+	if err := e.setAttributes(); err != nil {
+		return nil, err
 	}
 
 	return e, nil
@@ -114,4 +193,22 @@ func extractClasses(s string) []string {
 // a plain text.
 func doesContainPlainText(s string) bool {
 	return strings.HasSuffix(s, dot)
+}
+
+// unclosedToken returns true if the token is unclosed.
+func unclosedToken(s string, opts *Options) (bool, string) {
+	if len(strings.Split(s, doubleQuote)) == 2 {
+		return true, doubleQuote
+	}
+
+	if len(strings.Split(s, opts.DelimLeft)) == 2 {
+		return true, opts.DelimRight
+	}
+
+	return false, ""
+}
+
+// closedToken returns true if the token is closed.
+func closed(s string, closeMark string) bool {
+	return strings.HasSuffix(s, closeMark)
 }

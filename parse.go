@@ -55,13 +55,13 @@ func parseBytes(data []byte, rslt *result, opts *Options) ([]element, error) {
 		}
 
 		if ln.isTopIndent() {
-			e, err := newElement(ln, rslt, nil)
+			e, err := newElement(ln, rslt, nil, opts)
 			if err != nil {
 				return nil, err
 			}
 
 			// Append child elements to the element.
-			if err := appendChildren(e, lines, &i, &l, rslt); err != nil {
+			if err := appendChildren(e, lines, &i, l, rslt, opts); err != nil {
 				return nil, err
 			}
 
@@ -73,8 +73,8 @@ func parseBytes(data []byte, rslt *result, opts *Options) ([]element, error) {
 }
 
 // appendChildren parses the lines and appends the children to the element.
-func appendChildren(parent element, lines []string, i *int, l *int, rslt *result) error {
-	for *i < *l {
+func appendChildren(parent element, lines []string, i *int, l int, rslt *result, opts *Options) error {
+	for *i < l {
 		// Fetch a line.
 		ln := newLine(*i, lines[*i])
 
@@ -88,7 +88,7 @@ func appendChildren(parent element, lines []string, i *int, l *int, rslt *result
 			return nil
 		}
 
-		child, err := newElement(ln, rslt, parent)
+		child, err := newElement(ln, rslt, parent, opts)
 		if err != nil {
 			return err
 		}
@@ -98,7 +98,7 @@ func appendChildren(parent element, lines []string, i *int, l *int, rslt *result
 		*i++
 
 		if child.CanHaveChildren() {
-			if err := appendChildren(child, lines, i, l, rslt); err != nil {
+			if err := appendChildren(child, lines, i, l, rslt, opts); err != nil {
 				return err
 			}
 		}
