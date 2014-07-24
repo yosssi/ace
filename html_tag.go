@@ -1,6 +1,7 @@
 package ace
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 	"strings"
@@ -9,6 +10,7 @@ import (
 // Tag names
 const (
 	tagNameDiv = "div"
+	tagNameBr  = "br"
 )
 
 // Attribute names
@@ -30,7 +32,73 @@ type htmlTag struct {
 
 // WriteTo writes data to w.
 func (e *htmlTag) WriteTo(w io.Writer) (int64, error) {
-	return 0, nil
+	var bf bytes.Buffer
+
+	// Write an open tag.
+	bf.WriteString(lt)
+	bf.WriteString(e.tagName)
+	// Write an id.
+	if e.id != "" {
+		bf.WriteString(space)
+		bf.WriteString(attributeNameID)
+		bf.WriteString(equal)
+		bf.WriteString(doubleQuote)
+		bf.WriteString(e.id)
+		bf.WriteString(doubleQuote)
+	}
+	// Write classes.
+	if len(e.classes) > 0 {
+		bf.WriteString(space)
+		bf.WriteString(attributeNameClass)
+		bf.WriteString(equal)
+		bf.WriteString(doubleQuote)
+		for i, class := range e.classes {
+			if i > 0 {
+				bf.WriteString(space)
+			}
+			bf.WriteString(class)
+		}
+		bf.WriteString(doubleQuote)
+	}
+	// Write attributes.
+	if len(e.attributes) > 0 {
+		for k, v := range e.attributes {
+			bf.WriteString(space)
+			bf.WriteString(k)
+			if v != "" {
+				bf.WriteString(equal)
+				bf.WriteString(doubleQuote)
+				bf.WriteString(v)
+				bf.WriteString(doubleQuote)
+			}
+		}
+	}
+	bf.WriteString(gt)
+
+	// Write a text value
+	if e.textValue != "" {
+		bf.WriteString(e.textValue)
+	}
+
+	// Write children's HTML.
+	for _, child := range e.children {
+		if i, err := child.WriteTo(&bf); err != nil {
+			return int64(i), err
+		}
+	}
+
+	// Write a close tag.
+	if e.tagName != tagNameBr {
+		bf.WriteString(lt)
+		bf.WriteString(slash)
+		bf.WriteString(e.tagName)
+		bf.WriteString(gt)
+	}
+
+	// Write the buffer.
+	i, err := w.Write(bf.Bytes())
+
+	return int64(i), err
 }
 
 // ContainPlainText returns the HTML tag's containPlainText field.
@@ -45,7 +113,10 @@ func (e *htmlTag) setAttributes() error {
 	var unclosed bool
 	var closeMark string
 
-	for _, token := range e.ln.tokens {
+	for i, token := range e.ln.tokens {
+		if i == 0 {
+			continue
+		}
 		if unclosed {
 			unclosedTokenValues = append(unclosedTokenValues, token)
 
@@ -69,12 +140,14 @@ func (e *htmlTag) setAttributes() error {
 
 	var i int
 	var token string
+	var setTextValue bool
 
 	// Set attributes to the element.
 	for i, token = range parsedTokens {
 		kv := strings.Split(token, equal)
 
 		if len(kv) < 2 {
+			setTextValue = true
 			break
 		}
 
@@ -91,17 +164,18 @@ func (e *htmlTag) setAttributes() error {
 			if e.id != "" {
 				return fmt.Errorf("multiple IDs are specified [line: %d]", e.ln.no)
 			}
-
 			e.id = v
 		case attributeNameClass:
-			e.classes = append(e.classes, v)
+			e.classes = append(e.classes, strings.Split(v, space)...)
 		default:
 			e.attributes[k] = v
 		}
 	}
 
 	// Set a text value to the element.
-	e.textValue = strings.Join(parsedTokens[i:], space)
+	if setTextValue {
+		e.textValue = strings.Join(parsedTokens[i:], space)
+	}
 
 	return nil
 }
@@ -131,6 +205,7 @@ func newHTMLTag(ln *line, rslt *result, parent element, opts *Options) (*htmlTag
 		id:               id,
 		classes:          classes,
 		containPlainText: containPlainText,
+		attributes:       make(map[string]string),
 	}
 
 	if err := e.setAttributes(); err != nil {

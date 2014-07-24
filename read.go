@@ -19,6 +19,8 @@ const (
 	dot         = "."
 	colon       = ":"
 	doubleQuote = `"`
+	lt          = "<"
+	gt          = ">"
 )
 
 // readFiles reads files and returns source for the parsing process.
@@ -85,7 +87,7 @@ func findIncludePaths(data []byte) []string {
 	var includePaths []string
 
 	for i, str := range strings.Split(formatLF(string(data)), lf) {
-		ln := newLine(i, str)
+		ln := newLine(i+1, str)
 
 		if ln.isHelperMethodOf(helperMethodNameInclude) {
 			includePaths = append(includePaths, ln.tokens[2])

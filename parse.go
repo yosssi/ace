@@ -46,7 +46,7 @@ func parseBytes(data []byte, rslt *result, opts *Options) ([]element, error) {
 
 	for i < l {
 		// Fetch a line.
-		ln := newLine(i, lines[i])
+		ln := newLine(i+1, lines[i])
 		i++
 
 		// Ignore the empty line.
@@ -76,7 +76,7 @@ func parseBytes(data []byte, rslt *result, opts *Options) ([]element, error) {
 func appendChildren(parent element, lines []string, i *int, l int, rslt *result, opts *Options) error {
 	for *i < l {
 		// Fetch a line.
-		ln := newLine(*i, lines[*i])
+		ln := newLine(*i+1, lines[*i])
 
 		// Check if the line is a child of the parent.
 		ok, err := ln.childOf(parent)
