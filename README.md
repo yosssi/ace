@@ -30,6 +30,7 @@ You can get the official information and announcement about Ace via the followin
 
 You can discuss Ace and contact the Ace development team via the following channels:
 
+* [Chat](https://gitter.im/yosssi/ace)
 * [GitHub Issues](https://github.com/yosssi/ace/issues)
 * [Google Group](https://groups.google.com/forum/#!forum/acehtml)
 * [Twitter](https://twitter.com/acehtml)
