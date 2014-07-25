@@ -16,14 +16,14 @@ Ace is an HTML template engine for Go. This is inspired by [Slim](http://slim-la
 
 You can get the documentation about Ace via the following channels:
 
-* Official documents
+* [Documents](https://github.com/yosssi/ace/tree/master/docs)
 * [GoDoc](https://godoc.org/github.com/yosssi/ace)
 
 ## Official Information & Announcement
 
 You can get the official information and announcement about Ace via the following channels:
 
-* Official site
+* Website
 * [Twitter](https://twitter.com/acehtml)
 * [Google Group](https://groups.google.com/forum/#!forum/acehtml)
 
