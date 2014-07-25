@@ -7,12 +7,13 @@ import (
 
 // Helper method names
 const (
-	helperMethodNameContent    = "content"
-	helperMethodNameCSS        = "css"
-	helperMethodNameDoctype    = "doctype"
-	helperMethodNameYield      = "yield"
-	helperMethodNameInclude    = "include"
-	helperMethodNameJavascript = "javascript"
+	helperMethodNameConditionalComment = "conditionalComment"
+	helperMethodNameContent            = "content"
+	helperMethodNameCSS                = "css"
+	helperMethodNameDoctype            = "doctype"
+	helperMethodNameYield              = "yield"
+	helperMethodNameInclude            = "include"
+	helperMethodNameJavascript         = "javascript"
 )
 
 // element is an interface for storing an element.
@@ -38,10 +39,10 @@ func newElement(ln *line, rslt *result, parent element, opts *Options) (element,
 		e = newComment(ln, rslt, parent, opts)
 	case ln.isHTMLComment():
 		e = newHTMLComment(ln, rslt, parent, opts)
-	case ln.isConditionalComment():
-		e = newConditionalComment(ln, rslt, parent, opts)
 	case ln.isHelperMethod():
 		switch {
+		case ln.isHelperMethodOf(helperMethodNameConditionalComment):
+			e, err = newHelperMethodConditionalComment(ln, rslt, parent, opts)
 		case ln.isHelperMethodOf(helperMethodNameContent):
 			e = newHelperMethodContent(ln, rslt, parent, opts)
 		case ln.isHelperMethodOf(helperMethodNameCSS):

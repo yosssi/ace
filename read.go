@@ -11,16 +11,20 @@ const (
 	lf   = "\n"
 	crlf = "\r\n"
 
-	space       = " "
-	equal       = "="
-	pipe        = "|"
-	slash       = "/"
-	sharp       = "#"
-	dot         = "."
-	colon       = ":"
-	doubleQuote = `"`
-	lt          = "<"
-	gt          = ">"
+	space        = " "
+	equal        = "="
+	pipe         = "|"
+	slash        = "/"
+	sharp        = "#"
+	dot          = "."
+	colon        = ":"
+	doubleQuote  = `"`
+	lt           = "<"
+	gt           = ">"
+	exclamation  = "!"
+	hyphen       = "-"
+	bracketOpen  = "["
+	bracketClose = "]"
 )
 
 // readFiles reads files and returns source for the parsing process.

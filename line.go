@@ -52,11 +52,6 @@ func (l *line) isHTMLComment() bool {
 	return len(l.tokens) > 0 && l.tokens[0] == slash+slash
 }
 
-// isConditionalComment returns true if the line is a conditional comment.
-func (l *line) isConditionalComment() bool {
-	return len(l.tokens) > 0 && l.tokens[0] == slash+slash+slash
-}
-
 // childOf returns true is the line is a child of the element.
 func (l *line) childOf(parent element) (bool, error) {
 	var ok bool

@@ -7,7 +7,7 @@ type comment struct {
 	elementBase
 }
 
-// WriteTo writes data to w.
+// Do nothing.
 func (e *comment) WriteTo(w io.Writer) (int64, error) {
 	return 0, nil
 }

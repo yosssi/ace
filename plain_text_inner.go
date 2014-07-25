@@ -9,7 +9,8 @@ type plainTextInner struct {
 
 // WriteTo writes data to w.
 func (e *plainTextInner) WriteTo(w io.Writer) (int64, error) {
-	return 0, nil
+	i, err := w.Write([]byte(e.ln.str[e.parent.Base().ln.indent*2:] + lf))
+	return int64(i), err
 }
 
 // CanHaveChildren returns false.

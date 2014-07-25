@@ -81,10 +81,8 @@ func (e *htmlTag) WriteTo(w io.Writer) (int64, error) {
 	}
 
 	// Write children's HTML.
-	for _, child := range e.children {
-		if i, err := child.WriteTo(&bf); err != nil {
-			return int64(i), err
-		}
+	if i, err := e.writeChildren(&bf); err != nil {
+		return i, err
 	}
 
 	// Write a close tag.
