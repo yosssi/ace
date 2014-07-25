@@ -4,14 +4,12 @@ import "strings"
 
 // parseSource parses the source and returns the result.
 func parseSource(src *source, opts *Options) (*result, error) {
-	var rslt *result
-
-	base, err := parseBytes(src.base.data, rslt, opts)
+	base, err := parseBytes(src.base.data, src, opts)
 	if err != nil {
 		return nil, err
 	}
 
-	inner, err := parseBytes(src.inner.data, rslt, opts)
+	inner, err := parseBytes(src.inner.data, src, opts)
 	if err != nil {
 		return nil, err
 	}
@@ -19,19 +17,17 @@ func parseSource(src *source, opts *Options) (*result, error) {
 	includes := make(map[string][]element)
 
 	for _, f := range src.includes {
-		includes[f.path], err = parseBytes(f.data, rslt, opts)
+		includes[f.path], err = parseBytes(f.data, src, opts)
 		if err != nil {
 			return nil, err
 		}
 	}
 
-	rslt = newResult(base, inner, includes)
-
-	return rslt, nil
+	return newResult(base, inner, includes), nil
 }
 
 // parseBytes parses the byte data and returns the elements.
-func parseBytes(data []byte, rslt *result, opts *Options) ([]element, error) {
+func parseBytes(data []byte, src *source, opts *Options) ([]element, error) {
 	var elements []element
 
 	lines := strings.Split(formatLF(string(data)), lf)
@@ -55,13 +51,13 @@ func parseBytes(data []byte, rslt *result, opts *Options) ([]element, error) {
 		}
 
 		if ln.isTopIndent() {
-			e, err := newElement(ln, rslt, nil, opts)
+			e, err := newElement(ln, src, nil, opts)
 			if err != nil {
 				return nil, err
 			}
 
 			// Append child elements to the element.
-			if err := appendChildren(e, lines, &i, l, rslt, opts); err != nil {
+			if err := appendChildren(e, lines, &i, l, src, opts); err != nil {
 				return nil, err
 			}
 
@@ -73,7 +69,7 @@ func parseBytes(data []byte, rslt *result, opts *Options) ([]element, error) {
 }
 
 // appendChildren parses the lines and appends the children to the element.
-func appendChildren(parent element, lines []string, i *int, l int, rslt *result, opts *Options) error {
+func appendChildren(parent element, lines []string, i *int, l int, src *source, opts *Options) error {
 	for *i < l {
 		// Fetch a line.
 		ln := newLine(*i+1, lines[*i], opts)
@@ -89,7 +85,7 @@ func appendChildren(parent element, lines []string, i *int, l int, rslt *result,
 			return nil
 		}
 
-		child, err := newElement(ln, rslt, parent, opts)
+		child, err := newElement(ln, src, parent, opts)
 		if err != nil {
 			return err
 		}
@@ -99,7 +95,7 @@ func appendChildren(parent element, lines []string, i *int, l int, rslt *result,
 		*i++
 
 		if child.CanHaveChildren() {
-			if err := appendChildren(child, lines, i, l, rslt, opts); err != nil {
+			if err := appendChildren(child, lines, i, l, src, opts); err != nil {
 				return err
 			}
 		}

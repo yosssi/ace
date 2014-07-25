@@ -31,8 +31,8 @@ func (e *action) WriteTo(w io.Writer) (int64, error) {
 }
 
 // newAction creates and returns an action.
-func newAction(ln *line, rslt *result, parent element, opts *Options) *action {
+func newAction(ln *line, src *source, parent element, opts *Options) *action {
 	return &action{
-		elementBase: newElementBase(ln, rslt, parent, opts),
+		elementBase: newElementBase(ln, src, parent, opts),
 	}
 }

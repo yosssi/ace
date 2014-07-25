@@ -28,6 +28,7 @@ const (
 	hyphen       = "-"
 	bracketOpen  = "["
 	bracketClose = "]"
+	doubleColon  = "::"
 )
 
 // readFiles reads files and returns source for the parsing process.

@@ -5,7 +5,7 @@ import "bytes"
 // elementBase holds common fields for the elements.
 type elementBase struct {
 	ln       *line
-	rslt     *result
+	src      *source
 	parent   element
 	children []element
 	opts     *Options
@@ -53,10 +53,10 @@ func (e *elementBase) writeChildren(bf *bytes.Buffer) (int64, error) {
 }
 
 // newElementBase creates and returns an element base.
-func newElementBase(ln *line, rslt *result, parent element, opts *Options) elementBase {
+func newElementBase(ln *line, src *source, parent element, opts *Options) elementBase {
 	return elementBase{
 		ln:     ln,
-		rslt:   rslt,
+		src:    src,
 		parent: parent,
 		opts:   opts,
 	}

@@ -36,9 +36,9 @@ func (e *plainTextInner) CanHaveChildren() bool {
 }
 
 // newPlainTextInner creates and returns a plain text.
-func newPlainTextInner(ln *line, rslt *result, parent element, insertBr bool, opts *Options) *plainTextInner {
+func newPlainTextInner(ln *line, src *source, parent element, insertBr bool, opts *Options) *plainTextInner {
 	return &plainTextInner{
-		elementBase: newElementBase(ln, rslt, parent, opts),
+		elementBase: newElementBase(ln, src, parent, opts),
 		insertBr:    insertBr,
 	}
 }

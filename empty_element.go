@@ -18,8 +18,8 @@ func (e *emptyElement) CanHaveChildren() bool {
 }
 
 // newEmpty creates and returns an empty element.
-func newEmptyElement(ln *line, rslt *result, parent element, opts *Options) *emptyElement {
+func newEmptyElement(ln *line, src *source, parent element, opts *Options) *emptyElement {
 	return &emptyElement{
-		elementBase: newElementBase(ln, rslt, parent, opts),
+		elementBase: newElementBase(ln, src, parent, opts),
 	}
 }

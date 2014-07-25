@@ -28,7 +28,7 @@ func (e *helperMethodInclude) WriteTo(w io.Writer) (int64, error) {
 }
 
 // newHelperMethodInclude creates and returns a helper method include.
-func newHelperMethodInclude(ln *line, rslt *result, parent element, opts *Options) (*helperMethodInclude, error) {
+func newHelperMethodInclude(ln *line, src *source, parent element, opts *Options) (*helperMethodInclude, error) {
 	if len(ln.tokens) < 3 {
 		return nil, fmt.Errorf("no template name is specified [line: %d]", ln.no)
 	}
@@ -40,7 +40,7 @@ func newHelperMethodInclude(ln *line, rslt *result, parent element, opts *Option
 	}
 
 	e := &helperMethodInclude{
-		elementBase:  newElementBase(ln, rslt, parent, opts),
+		elementBase:  newElementBase(ln, src, parent, opts),
 		templateName: ln.tokens[2],
 		pipeline:     pipeline,
 	}

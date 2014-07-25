@@ -13,8 +13,8 @@ func (e *helperMethodYield) WriteTo(w io.Writer) (int64, error) {
 }
 
 // newHelperMethodYield creates and returns a helper method yield.
-func newHelperMethodYield(ln *line, rslt *result, parent element, opts *Options) *helperMethodYield {
+func newHelperMethodYield(ln *line, src *source, parent element, opts *Options) *helperMethodYield {
 	return &helperMethodYield{
-		elementBase: newElementBase(ln, rslt, parent, opts),
+		elementBase: newElementBase(ln, src, parent, opts),
 	}
 }

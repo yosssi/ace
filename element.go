@@ -27,44 +27,44 @@ type element interface {
 }
 
 // newElement creates and returns an element.
-func newElement(ln *line, rslt *result, parent element, opts *Options) (element, error) {
+func newElement(ln *line, src *source, parent element, opts *Options) (element, error) {
 	var e element
 	var err error
 
 	switch {
 	case parent != nil && parent.ContainPlainText():
-		e = newPlainTextInner(ln, rslt, parent, parent.InsertBr(), opts)
+		e = newPlainTextInner(ln, src, parent, parent.InsertBr(), opts)
 	case ln.isEmpty():
-		e = newEmptyElement(ln, rslt, parent, opts)
+		e = newEmptyElement(ln, src, parent, opts)
 	case ln.isComment():
-		e = newComment(ln, rslt, parent, opts)
+		e = newComment(ln, src, parent, opts)
 	case ln.isHTMLComment():
-		e = newHTMLComment(ln, rslt, parent, opts)
+		e = newHTMLComment(ln, src, parent, opts)
 	case ln.isHelperMethod():
 		switch {
 		case ln.isHelperMethodOf(helperMethodNameConditionalComment):
-			e, err = newHelperMethodConditionalComment(ln, rslt, parent, opts)
+			e, err = newHelperMethodConditionalComment(ln, src, parent, opts)
 		case ln.isHelperMethodOf(helperMethodNameContent):
-			e = newHelperMethodContent(ln, rslt, parent, opts)
+			e, err = newHelperMethodContent(ln, src, parent, opts)
 		case ln.isHelperMethodOf(helperMethodNameCSS):
-			e = newHelperMethodCSS(ln, rslt, parent, opts)
+			e = newHelperMethodCSS(ln, src, parent, opts)
 		case ln.isHelperMethodOf(helperMethodNameDoctype):
-			e, err = newHelperMethodDoctype(ln, rslt, parent, opts)
+			e, err = newHelperMethodDoctype(ln, src, parent, opts)
 		case ln.isHelperMethodOf(helperMethodNameInclude):
-			e, err = newHelperMethodInclude(ln, rslt, parent, opts)
+			e, err = newHelperMethodInclude(ln, src, parent, opts)
 		case ln.isHelperMethodOf(helperMethodNameJavascript):
-			e = newHelperMethodJavascript(ln, rslt, parent, opts)
+			e = newHelperMethodJavascript(ln, src, parent, opts)
 		case ln.isHelperMethodOf(helperMethodNameYield):
-			e = newHelperMethodYield(ln, rslt, parent, opts)
+			e = newHelperMethodYield(ln, src, parent, opts)
 		default:
 			err = fmt.Errorf("the helper method name is invalid [line: %d]", ln.no)
 		}
 	case ln.isPlainText():
-		e = newPlainText(ln, rslt, parent, opts)
+		e = newPlainText(ln, src, parent, opts)
 	case ln.isAction():
-		e = newAction(ln, rslt, parent, opts)
+		e = newAction(ln, src, parent, opts)
 	default:
-		e, err = newHTMLTag(ln, rslt, parent, opts)
+		e, err = newHTMLTag(ln, src, parent, opts)
 	}
 
 	return e, err

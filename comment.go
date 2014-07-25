@@ -18,8 +18,8 @@ func (e *comment) ContainPlainText() bool {
 }
 
 // newComment creates and returns a comment.
-func newComment(ln *line, rslt *result, parent element, opts *Options) *comment {
+func newComment(ln *line, src *source, parent element, opts *Options) *comment {
 	return &comment{
-		elementBase: newElementBase(ln, rslt, parent, opts),
+		elementBase: newElementBase(ln, src, parent, opts),
 	}
 }
