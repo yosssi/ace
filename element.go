@@ -61,6 +61,8 @@ func newElement(ln *line, rslt *result, parent element, opts *Options) (element,
 		}
 	case ln.isPlainText():
 		e = newPlainText(ln, rslt, parent, opts)
+	case ln.isAction():
+		e = newAction(ln, rslt, parent, opts)
 	default:
 		e, err = newHTMLTag(ln, rslt, parent, opts)
 	}

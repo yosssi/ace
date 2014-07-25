@@ -15,6 +15,7 @@ type line struct {
 	str    string
 	indent int
 	tokens []string
+	opts   *Options
 }
 
 // isEmpty returns true if the line is empty.
@@ -52,16 +53,22 @@ func (l *line) isHTMLComment() bool {
 	return len(l.tokens) > 0 && l.tokens[0] == slash+slash
 }
 
+// isAction returns true if the line is an action.
+func (l *line) isAction() bool {
+	str := strings.TrimSpace(l.str)
+	return strings.HasPrefix(str, l.opts.DelimLeft) && strings.HasSuffix(str, l.opts.DelimRight)
+}
+
 // childOf returns true is the line is a child of the element.
 func (l *line) childOf(parent element) (bool, error) {
 	var ok bool
 	var err error
 
 	switch {
+	case l.isEmpty():
+		ok = true
 	case parent.ContainPlainText():
 		switch {
-		case l.isEmpty():
-			ok = true
 		case parent.Base().ln.indent < l.indent:
 			ok = true
 		}
@@ -78,12 +85,13 @@ func (l *line) childOf(parent element) (bool, error) {
 }
 
 // newLine creates and returns a line.
-func newLine(no int, str string) *line {
+func newLine(no int, str string, opts *Options) *line {
 	return &line{
 		no:     no,
 		str:    str,
 		indent: indent(str),
 		tokens: strings.Split(strings.TrimLeft(str, space), space),
+		opts:   opts,
 	}
 }
 

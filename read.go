@@ -70,7 +70,7 @@ func readFile(path string, opts *Options) (*file, error) {
 
 // findIncludes finds and adds include files.
 func findIncludes(data []byte, opts *Options, includes *[]*file) error {
-	for _, includePath := range findIncludePaths(data) {
+	for _, includePath := range findIncludePaths(data, opts) {
 		if !hasFile(*includes, includePath) {
 			f, err := readFile(includePath, opts)
 			if err != nil {
@@ -89,11 +89,11 @@ func findIncludes(data []byte, opts *Options, includes *[]*file) error {
 }
 
 // findIncludePaths finds and returns include paths.
-func findIncludePaths(data []byte) []string {
+func findIncludePaths(data []byte, opts *Options) []string {
 	var includePaths []string
 
 	for i, str := range strings.Split(formatLF(string(data)), lf) {
-		ln := newLine(i+1, str)
+		ln := newLine(i+1, str, opts)
 
 		if ln.isHelperMethodOf(helperMethodNameInclude) {
 			includePaths = append(includePaths, ln.tokens[2])
