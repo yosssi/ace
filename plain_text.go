@@ -23,10 +23,10 @@ func (e *plainText) WriteTo(w io.Writer) (int64, error) {
 		bf.WriteString(htmlBr)
 	}
 
+	// Write the children's HTML.
 	if len(e.children) > 0 {
 		bf.WriteString(lf)
 
-		// Write the children's HTML.
 		if i, err := e.writeChildren(&bf); err != nil {
 			return i, err
 		}

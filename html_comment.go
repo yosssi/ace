@@ -1,6 +1,10 @@
 package ace
 
-import "io"
+import (
+	"bytes"
+	"io"
+	"strings"
+)
 
 // htmlComment represents an HTML comment.
 type htmlComment struct {
@@ -9,7 +13,42 @@ type htmlComment struct {
 
 // WriteTo writes data to w.
 func (e *htmlComment) WriteTo(w io.Writer) (int64, error) {
-	return 0, nil
+	var bf bytes.Buffer
+
+	// Write an open tag.
+	bf.WriteString(lt)
+	bf.WriteString(exclamation)
+	bf.WriteString(hyphen)
+	bf.WriteString(hyphen)
+
+	// Write the HTML comment
+	if len(e.ln.tokens) > 1 {
+		bf.WriteString(space)
+		bf.WriteString(strings.Join(e.ln.tokens[1:], space))
+	}
+
+	// Write the children's HTML.
+	if len(e.children) > 0 {
+		bf.WriteString(lf)
+
+		if i, err := e.writeChildren(&bf); err != nil {
+			return i, err
+		}
+	} else {
+		bf.WriteString(space)
+
+	}
+
+	// Write a close tag.
+	bf.WriteString(hyphen)
+	bf.WriteString(hyphen)
+	bf.WriteString(gt)
+
+	// Write the buffer.
+	i, err := w.Write(bf.Bytes())
+
+	return int64(i), err
+
 }
 
 // ContainPlainText returns true.
