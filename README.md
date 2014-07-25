@@ -23,6 +23,7 @@ You can get the documentation about Ace via the following channels:
 
 You can get the official information and announcement about Ace via the following channels:
 
+* Official site
 * [Twitter](https://twitter.com/acehtml)
 * [Google Group](https://groups.google.com/forum/#!forum/acehtml)
 
