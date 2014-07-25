@@ -37,3 +37,9 @@ You can discuss Ace and contact the Ace development team via the following chann
 * [Gitter (Chat)](https://gitter.im/yosssi/ace)
 * [Keiji Yoshida (Author of Ace)'s Twitter](https://twitter.com/_yosssi)
 * [Keiji Yoshida (Author of Ace)'s Email](mailto:yoshida.keiji.84@gmail.com)
+
+## Tools
+
+* HTML2Ace
+* Ace2HTML
+* vim-ace - Vim syntax highlighting for Ace templates
