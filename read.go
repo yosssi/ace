@@ -1,6 +1,7 @@
 package ace
 
 import (
+	"fmt"
 	"io/ioutil"
 	"strings"
 )
@@ -70,7 +71,12 @@ func readFile(path string, opts *Options) (*file, error) {
 
 // findIncludes finds and adds include files.
 func findIncludes(data []byte, opts *Options, includes *[]*file) error {
-	for _, includePath := range findIncludePaths(data, opts) {
+	includePaths, err := findIncludePaths(data, opts)
+	if err != nil {
+		return err
+	}
+
+	for _, includePath := range includePaths {
 		if !hasFile(*includes, includePath) {
 			f, err := readFile(includePath, opts)
 			if err != nil {
@@ -89,18 +95,22 @@ func findIncludes(data []byte, opts *Options, includes *[]*file) error {
 }
 
 // findIncludePaths finds and returns include paths.
-func findIncludePaths(data []byte, opts *Options) []string {
+func findIncludePaths(data []byte, opts *Options) ([]string, error) {
 	var includePaths []string
 
 	for i, str := range strings.Split(formatLF(string(data)), lf) {
 		ln := newLine(i+1, str, opts)
 
 		if ln.isHelperMethodOf(helperMethodNameInclude) {
+			if len(ln.tokens) < 3 {
+				return nil, fmt.Errorf("no template name is specified [line: %d]", ln.no)
+			}
+
 			includePaths = append(includePaths, ln.tokens[2])
 		}
 	}
 
-	return includePaths
+	return includePaths, nil
 }
 
 // formatLF replaces the line feed codes with LF and returns the result.

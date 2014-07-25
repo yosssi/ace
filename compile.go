@@ -6,6 +6,14 @@ import (
 	"html/template"
 )
 
+// Actions
+const (
+	actionDefine               = `%sdefine "%s"%s`
+	actionEnd                  = "%send%s"
+	actionTemplate             = `%stemplate "%s"%s`
+	actionTemplateWithPipeline = `%stemplate "%s" %s%s`
+)
+
 // compileResult compiles the parsed result to the template.Template.
 func compileResult(name string, rslt *result, opts *Options) (*template.Template, error) {
 	// Create a buffer.
@@ -29,11 +37,17 @@ func compileResult(name string, rslt *result, opts *Options) (*template.Template
 	for path, elements := range rslt.includes {
 		bf := bytes.NewBuffer(nil)
 
+		// Write a define action.
+		bf.WriteString(fmt.Sprintf(actionDefine, opts.DelimLeft, path, opts.DelimRight))
+
 		for _, e := range elements {
 			if _, err := e.WriteTo(bf); err != nil {
 				return nil, err
 			}
 		}
+
+		// Write an end action.
+		bf.WriteString(fmt.Sprintf(actionEnd, opts.DelimLeft, opts.DelimRight))
 
 		includeBfs[path] = bf
 	}

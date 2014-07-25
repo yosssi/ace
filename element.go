@@ -51,7 +51,7 @@ func newElement(ln *line, rslt *result, parent element, opts *Options) (element,
 		case ln.isHelperMethodOf(helperMethodNameDoctype):
 			e, err = newHelperMethodDoctype(ln, rslt, parent, opts)
 		case ln.isHelperMethodOf(helperMethodNameInclude):
-			e = newHelperMethodInclude(ln, rslt, parent, opts)
+			e, err = newHelperMethodInclude(ln, rslt, parent, opts)
 		case ln.isHelperMethodOf(helperMethodNameJavascript):
 			e = newHelperMethodJavascript(ln, rslt, parent, opts)
 		case ln.isHelperMethodOf(helperMethodNameYield):
