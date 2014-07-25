@@ -39,7 +39,7 @@ func (l *line) isHelperMethodOf(name string) bool {
 
 // isPlainText returns true if the line is a plain text.
 func (l *line) isPlainText() bool {
-	return len(l.tokens) > 0 && l.tokens[0] == pipe
+	return len(l.tokens) > 0 && (l.tokens[0] == pipe || l.tokens[0] == doublePipe)
 }
 
 // isComment returns true if the line is a comment.

@@ -26,6 +26,7 @@ type htmlTag struct {
 	id               string
 	classes          []string
 	containPlainText bool
+	insertBr         bool
 	attributes       map[string]string
 	textValue        string
 }
@@ -80,6 +81,10 @@ func (e *htmlTag) WriteTo(w io.Writer) (int64, error) {
 		bf.WriteString(e.textValue)
 	}
 
+	if e.containPlainText {
+		bf.WriteString(lf)
+	}
+
 	// Write children's HTML.
 	if i, err := e.writeChildren(&bf); err != nil {
 		return i, err
@@ -102,6 +107,11 @@ func (e *htmlTag) WriteTo(w io.Writer) (int64, error) {
 // ContainPlainText returns the HTML tag's containPlainText field.
 func (e *htmlTag) ContainPlainText() bool {
 	return e.containPlainText
+}
+
+// InsertBr returns true if the br tag is inserted to the line.
+func (e *htmlTag) InsertBr() bool {
+	return e.insertBr
 }
 
 // setAttributes parses the tokens and set attributes to the element.
@@ -195,14 +205,13 @@ func newHTMLTag(ln *line, rslt *result, parent element, opts *Options) (*htmlTag
 
 	classes := extractClasses(s)
 
-	containPlainText := doesContainPlainText(s)
-
 	e := &htmlTag{
 		elementBase:      newElementBase(ln, rslt, parent, opts),
 		tagName:          tagName,
 		id:               id,
 		classes:          classes,
-		containPlainText: containPlainText,
+		containPlainText: strings.HasSuffix(s, dot),
+		insertBr:         strings.HasSuffix(s, doubleDot),
 		attributes:       make(map[string]string),
 	}
 
@@ -260,12 +269,6 @@ func extractClasses(s string) []string {
 	}
 
 	return classes
-}
-
-// doesContainPlainText returns true if the element contains
-// a plain text.
-func doesContainPlainText(s string) bool {
-	return strings.HasSuffix(s, dot)
 }
 
 // unclosedToken returns true if the token is unclosed.

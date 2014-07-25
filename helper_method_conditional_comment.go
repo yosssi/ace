@@ -40,7 +40,7 @@ func (e *helperMethodConditionalComment) WriteTo(w io.Writer) (int64, error) {
 
 	bf.WriteString(lf)
 
-	// Write children's HTML.
+	// Write the children's HTML.
 	if i, err := e.writeChildren(&bf); err != nil {
 		return i, err
 	}

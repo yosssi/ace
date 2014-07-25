@@ -35,6 +35,13 @@ func (e *elementBase) CanHaveChildren() bool {
 	return true
 }
 
+// InsertBr returns false.
+// This method should be overrided by a struct which contains
+// the element base struct.
+func (e *elementBase) InsertBr() bool {
+	return false
+}
+
 // writeChildren writes the children's HTML.
 func (e *elementBase) writeChildren(bf *bytes.Buffer) (int64, error) {
 	for _, child := range e.children {

@@ -1,6 +1,9 @@
 package ace
 
-import "io"
+import (
+	"bytes"
+	"io"
+)
 
 // helperMethodContent represents a helper method content.
 type helperMethodContent struct {
@@ -9,7 +12,17 @@ type helperMethodContent struct {
 
 // WriteTo writes data to w.
 func (e *helperMethodContent) WriteTo(w io.Writer) (int64, error) {
-	return 0, nil
+	var bf bytes.Buffer
+
+	// Write the children's HTML.
+	if i, err := e.writeChildren(&bf); err != nil {
+		return i, err
+	}
+
+	// Write the buffer.
+	i, err := w.Write(bf.Bytes())
+
+	return int64(i), err
 }
 
 // newHelperMethodContent creates and returns a helper method content.

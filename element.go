@@ -23,6 +23,7 @@ type element interface {
 	ContainPlainText() bool
 	Base() *elementBase
 	CanHaveChildren() bool
+	InsertBr() bool
 }
 
 // newElement creates and returns an element.
@@ -32,7 +33,7 @@ func newElement(ln *line, rslt *result, parent element, opts *Options) (element,
 
 	switch {
 	case parent != nil && parent.ContainPlainText():
-		e = newPlainTextInner(ln, rslt, parent, opts)
+		e = newPlainTextInner(ln, rslt, parent, parent.InsertBr(), opts)
 	case ln.isEmpty():
 		e = newEmptyElement(ln, rslt, parent, opts)
 	case ln.isComment():

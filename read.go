@@ -14,9 +14,11 @@ const (
 	space        = " "
 	equal        = "="
 	pipe         = "|"
+	doublePipe   = pipe + pipe
 	slash        = "/"
 	sharp        = "#"
 	dot          = "."
+	doubleDot    = dot + dot
 	colon        = ":"
 	doubleQuote  = `"`
 	lt           = "<"

@@ -2,14 +2,31 @@ package ace
 
 import "io"
 
+// HTML
+const (
+	htmlBr = "<br>"
+)
+
 // plainTextInner represents a plain text inner.
 type plainTextInner struct {
 	elementBase
+	insertBr bool
 }
 
 // WriteTo writes data to w.
 func (e *plainTextInner) WriteTo(w io.Writer) (int64, error) {
-	i, err := w.Write([]byte(e.ln.str[e.parent.Base().ln.indent*2:] + lf))
+	s := ""
+
+	if (e.parent.Base().ln.indent+1)*2 <= len(e.ln.str) {
+		s = e.ln.str[(e.parent.Base().ln.indent+1)*2:]
+	}
+
+	if e.insertBr {
+		s += htmlBr
+	}
+
+	i, err := w.Write([]byte(s + lf))
+
 	return int64(i), err
 }
 
@@ -19,8 +36,9 @@ func (e *plainTextInner) CanHaveChildren() bool {
 }
 
 // newPlainTextInner creates and returns a plain text.
-func newPlainTextInner(ln *line, rslt *result, parent element, opts *Options) *plainTextInner {
+func newPlainTextInner(ln *line, rslt *result, parent element, insertBr bool, opts *Options) *plainTextInner {
 	return &plainTextInner{
 		elementBase: newElementBase(ln, rslt, parent, opts),
+		insertBr:    insertBr,
 	}
 }

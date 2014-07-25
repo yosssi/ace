@@ -7,7 +7,7 @@ type emptyElement struct {
 	elementBase
 }
 
-// Does nothing.
+// Do nothing.
 func (e *emptyElement) WriteTo(w io.Writer) (int64, error) {
 	return 0, nil
 }
