@@ -55,6 +55,10 @@ becomes
 
 ## Installation
 
+```sh
+$ go get github.com/yosssi/ace/...
+```
+
 ## Implementation Example
 
 ## Documentation
