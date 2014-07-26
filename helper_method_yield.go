@@ -18,7 +18,7 @@ func (e *helperMethodYield) WriteTo(w io.Writer) (int64, error) {
 
 	inner := e.src.inner
 	if inner == nil {
-		return 0, fmt.Errorf("inner is not specified [line: %d]", e.ln.no)
+		return 0, fmt.Errorf("inner is not specified [file: %s][line: %d]", e.ln.fileName(), e.ln.no)
 	}
 
 	var templateExists bool
@@ -48,7 +48,7 @@ func (e *helperMethodYield) WriteTo(w io.Writer) (int64, error) {
 // newHelperMethodYield creates and returns a helper method yield.
 func newHelperMethodYield(ln *line, rslt *result, src *source, parent element, opts *Options) (*helperMethodYield, error) {
 	if len(ln.tokens) < 3 {
-		return nil, fmt.Errorf("no template name is specified [line: %d]", ln.no)
+		return nil, fmt.Errorf("no template name is specified [file: %s][line: %d]", ln.fileName(), ln.no)
 	}
 
 	e := &helperMethodYield{

@@ -16,6 +16,7 @@ type line struct {
 	indent int
 	tokens []string
 	opts   *Options
+	file   *file
 }
 
 // isEmpty returns true if the line is empty.
@@ -59,6 +60,11 @@ func (l *line) isAction() bool {
 	return strings.HasPrefix(str, l.opts.DelimLeft) && strings.HasSuffix(str, l.opts.DelimRight)
 }
 
+// fileName returns the file name.
+func (l *line) fileName() string {
+	return l.file.path + dot + l.opts.Extension
+}
+
 // childOf returns true is the line is a child of the element.
 func (l *line) childOf(parent element) (bool, error) {
 	var ok bool
@@ -77,7 +83,7 @@ func (l *line) childOf(parent element) (bool, error) {
 		case l.indent == parent.Base().ln.indent+1:
 			ok = true
 		case l.indent > parent.Base().ln.indent+1:
-			err = fmt.Errorf("the indent is invalid [line: %d]", l.no)
+			err = fmt.Errorf("the indent is invalid [file: %s][line: %d]", l.fileName(), l.no)
 		}
 	}
 
@@ -85,13 +91,14 @@ func (l *line) childOf(parent element) (bool, error) {
 }
 
 // newLine creates and returns a line.
-func newLine(no int, str string, opts *Options) *line {
+func newLine(no int, str string, opts *Options, f *file) *line {
 	return &line{
 		no:     no,
 		str:    str,
 		indent: indent(str),
 		tokens: strings.Split(strings.TrimLeft(str, space), space),
 		opts:   opts,
+		file:   f,
 	}
 }
 

@@ -32,13 +32,13 @@ func (e *helperMethodDoctype) WriteTo(w io.Writer) (int64, error) {
 // newHelperMethodDoctype creates and returns a helper method doctype.
 func newHelperMethodDoctype(ln *line, rslt *result, src *source, parent element, opts *Options) (*helperMethodDoctype, error) {
 	if len(ln.tokens) < 3 {
-		return nil, fmt.Errorf("doctype is not specified [line: %d]", ln.no)
+		return nil, fmt.Errorf("doctype is not specified [file: %s][line: %d]", ln.fileName(), ln.no)
 	}
 
 	doctype := ln.tokens[2]
 
 	if _, ok := doctypes[doctype]; !ok {
-		return nil, fmt.Errorf("doctype is invalid [line: %d][doctype: %s]", ln.no, doctype)
+		return nil, fmt.Errorf("doctype is invalid [file: %s][line: %d][doctype: %s]", ln.fileName(), ln.no, doctype)
 	}
 
 	e := &helperMethodDoctype{

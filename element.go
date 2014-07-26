@@ -58,7 +58,7 @@ func newElement(ln *line, rslt *result, src *source, parent element, opts *Optio
 		case ln.isHelperMethodOf(helperMethodNameYield):
 			e, err = newHelperMethodYield(ln, rslt, src, parent, opts)
 		default:
-			err = fmt.Errorf("the helper method name is invalid [line: %d]", ln.no)
+			err = fmt.Errorf("the helper method name is invalid [file: %s][line: %d]", ln.fileName(), ln.no)
 		}
 	case ln.isPlainText():
 		e = newPlainText(ln, rslt, src, parent, opts)

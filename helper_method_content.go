@@ -18,7 +18,7 @@ func (e *helperMethodContent) WriteTo(w io.Writer) (int64, error) {
 
 	inner := e.src.inner
 	if inner == nil {
-		return 0, fmt.Errorf("inner is not specified [line: %d]", e.ln.no)
+		return 0, fmt.Errorf("inner is not specified [file: %s][line: %d]", e.ln.fileName(), e.ln.no)
 	}
 
 	// Write a define action.
@@ -41,7 +41,7 @@ func (e *helperMethodContent) WriteTo(w io.Writer) (int64, error) {
 // newHelperMethodContent creates and returns a helper method content.
 func newHelperMethodContent(ln *line, rslt *result, src *source, parent element, opts *Options) (*helperMethodContent, error) {
 	if len(ln.tokens) < 3 || ln.tokens[2] == "" {
-		return nil, fmt.Errorf("no name is specified [line: %d]", ln.no)
+		return nil, fmt.Errorf("no name is specified [file: %s][line: %d]", ln.fileName(), ln.no)
 	}
 
 	e := &helperMethodContent{

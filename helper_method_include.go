@@ -30,7 +30,7 @@ func (e *helperMethodInclude) WriteTo(w io.Writer) (int64, error) {
 // newHelperMethodInclude creates and returns a helper method include.
 func newHelperMethodInclude(ln *line, rslt *result, src *source, parent element, opts *Options) (*helperMethodInclude, error) {
 	if len(ln.tokens) < 3 {
-		return nil, fmt.Errorf("no template name is specified [line: %d]", ln.no)
+		return nil, fmt.Errorf("no template name is specified [file: %s][line: %d]", ln.fileName(), ln.no)
 	}
 
 	var pipeline string

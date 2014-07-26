@@ -48,12 +48,12 @@ func readFiles(basePath, innerPath string, opts *Options) (*source, error) {
 	var includes []*file
 
 	// Find include files from the base file.
-	if err := findIncludes(base.data, opts, &includes); err != nil {
+	if err := findIncludes(base.data, opts, &includes, base); err != nil {
 		return nil, err
 	}
 
 	// Find include files from the inner file.
-	if err := findIncludes(inner.data, opts, &includes); err != nil {
+	if err := findIncludes(inner.data, opts, &includes, inner); err != nil {
 		return nil, err
 	}
 
@@ -76,8 +76,8 @@ func readFile(path string, opts *Options) (*file, error) {
 }
 
 // findIncludes finds and adds include files.
-func findIncludes(data []byte, opts *Options, includes *[]*file) error {
-	includePaths, err := findIncludePaths(data, opts)
+func findIncludes(data []byte, opts *Options, includes *[]*file, targetFile *file) error {
+	includePaths, err := findIncludePaths(data, opts, targetFile)
 	if err != nil {
 		return err
 	}
@@ -91,7 +91,7 @@ func findIncludes(data []byte, opts *Options, includes *[]*file) error {
 
 			*includes = append(*includes, f)
 
-			if err := findIncludes(f.data, opts, includes); err != nil {
+			if err := findIncludes(f.data, opts, includes, f); err != nil {
 				return err
 			}
 		}
@@ -101,15 +101,15 @@ func findIncludes(data []byte, opts *Options, includes *[]*file) error {
 }
 
 // findIncludePaths finds and returns include paths.
-func findIncludePaths(data []byte, opts *Options) ([]string, error) {
+func findIncludePaths(data []byte, opts *Options, f *file) ([]string, error) {
 	var includePaths []string
 
 	for i, str := range strings.Split(formatLF(string(data)), lf) {
-		ln := newLine(i+1, str, opts)
+		ln := newLine(i+1, str, opts, f)
 
 		if ln.isHelperMethodOf(helperMethodNameInclude) {
 			if len(ln.tokens) < 3 {
-				return nil, fmt.Errorf("no template name is specified [line: %d]", ln.no)
+				return nil, fmt.Errorf("no template name is specified [file: %s][line: %d]", ln.fileName(), ln.no)
 			}
 
 			includePaths = append(includePaths, ln.tokens[2])

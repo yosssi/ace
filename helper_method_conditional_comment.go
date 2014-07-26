@@ -72,15 +72,15 @@ func (e *helperMethodConditionalComment) ContainPlainText() bool {
 func newHelperMethodConditionalComment(ln *line, rslt *result, src *source, parent element, opts *Options) (*helperMethodConditionalComment, error) {
 	switch len(ln.tokens) {
 	case 2:
-		return nil, fmt.Errorf("no comment type is specified [line: %d]", ln.no)
+		return nil, fmt.Errorf("no comment type is specified [file: %s][line: %d]", ln.fileName(), ln.no)
 	case 3:
-		return nil, fmt.Errorf("no condition is specified [line: %d]", ln.no)
+		return nil, fmt.Errorf("no condition is specified [file: %s][line: %d]", ln.fileName(), ln.no)
 	}
 
 	commentType := ln.tokens[2]
 
 	if commentType != commentTypeHidden && commentType != commentTypeRevealed {
-		return nil, fmt.Errorf("the comment type is invalid [line: %d]", ln.no)
+		return nil, fmt.Errorf("the comment type is invalid [file: %s][line: %d]", ln.fileName(), ln.no)
 	}
 
 	e := &helperMethodConditionalComment{

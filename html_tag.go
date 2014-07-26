@@ -170,7 +170,7 @@ func (e *htmlTag) setAttributes() error {
 		switch k {
 		case attributeNameID:
 			if e.id != "" {
-				return fmt.Errorf("multiple IDs are specified [line: %d]", e.ln.no)
+				return fmt.Errorf("multiple IDs are specified [file: %s][line: %d]", e.ln.fileName(), e.ln.no)
 			}
 			e.id = v
 		case attributeNameClass:
@@ -191,7 +191,7 @@ func (e *htmlTag) setAttributes() error {
 // newHTMLTag creates and returns an HTML tag.
 func newHTMLTag(ln *line, rslt *result, src *source, parent element, opts *Options) (*htmlTag, error) {
 	if len(ln.tokens) < 1 {
-		return nil, fmt.Errorf("an HTML tag is not specified [line: %d]", ln.no)
+		return nil, fmt.Errorf("an HTML tag is not specified [file: %s][line: %d]", ln.fileName(), ln.no)
 	}
 
 	s := ln.tokens[0]
@@ -244,7 +244,7 @@ func extractID(s string, ln *line) (string, error) {
 	}
 
 	if l > 2 {
-		return "", fmt.Errorf("multiple IDs are specified [line: %d]", ln.no)
+		return "", fmt.Errorf("multiple IDs are specified [file: %s][line: %d]", ln.fileName(), ln.no)
 	}
 
 	return strings.Split(tokens[1], dot)[0], nil
