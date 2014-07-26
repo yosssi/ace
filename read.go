@@ -67,7 +67,14 @@ func readFile(path string, opts *Options) (*File, error) {
 	var err error
 
 	if path != "" {
-		data, err = ioutil.ReadFile(filepath.Join(opts.BaseDir, path+"."+opts.Extension))
+		name := filepath.Join(opts.BaseDir, path+dot+opts.Extension)
+
+		if opts.Asset != nil {
+			data, err = opts.Asset(name)
+		} else {
+			data, err = ioutil.ReadFile(name)
+		}
+
 		if err != nil {
 			return nil, err
 		}

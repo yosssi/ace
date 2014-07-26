@@ -20,6 +20,10 @@ type Options struct {
 	Cache bool
 	// BaseDir represents a base directory of the Ace templates.
 	BaseDir string
+	// Asset loads and returns the asset for the given name.
+	// If this function is set, Ace load the template data from
+	// this function instead of the template files.
+	Asset func(name string) ([]byte, error)
 }
 
 // initializeOptions initializes the options
