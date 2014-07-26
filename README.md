@@ -57,7 +57,7 @@ becomes
 ## Installation
 
 ```sh
-$ go get github.com/yosssi/ace/...
+$ go get github.com/yosssi/ace
 ```
 
 ## Implementation Example
