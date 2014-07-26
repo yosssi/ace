@@ -60,8 +60,15 @@ becomes
 
 ### Simple Syntax
 
-Ace has a simple syntax and this makes the HTML templates simple and light.
+Ace has a simple syntax and **this makes the HTML templates simple and light**.
 
+### Caching Function
+
+Ace has a caching function which caches the result data of the Ace templates parsing process. You can omit the Ace templates parsing process and **make your application's parsing and rendering function faster** by using this caching function. Using this caching function is recommended in production.
+
+### Binary Template Load Function
+
+Ace has a binary template load function which loads Ace templates from binary data instead of template files. **You can compile your web application into one binary file** by using this function. [go-bindata](https://github.com/jteeuwen/go-bindata) is the best for generating binaray data from template files.
 
 ## Documentation
 
