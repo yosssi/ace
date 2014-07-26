@@ -6,7 +6,7 @@ This document explains a basic usage of Ace by showing a simple example.
 
 Create the following Ace templates.
 
-`base.ace`
+base.ace
 
 ```ace
 = doctype html
@@ -26,7 +26,7 @@ html lang=en
       alert('{{.Msg}}');
 ```
 
-`inner.ace`
+inner.ace
 
 ```ace
 = content main
@@ -36,7 +36,7 @@ html lang=en
   h3 Inner Template - Sub : {{.Msg}}
 ```
 
-`inc.ace`
+inc.ace
 
 ```ace
 h4 Included Template : {{.}}
@@ -46,7 +46,7 @@ h4 Included Template : {{.}}
 
 Create the following web application.
 
-`main.go`
+main.go
 
 ```go
 package main
@@ -75,8 +75,28 @@ func main() {
 
 ## 3. Check the result.
 
-Run the web application and access [localhost:8080](http://localhost:8080). The following HTML will be rendered.
+Run the above web application and access [localhost:8080](http://localhost:8080). The following HTML will be rendered.
 
 ```html
-
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Ace example</title>
+    <style type="text/css">
+      h1 { color: blue; }
+    </style>
+  </head>
+  <body>
+    <h1>Base Template : Hello Ace</h1>
+    <div id="container" class="wrapper">
+      <h2>Inner Template - Main : Hello Ace</h2>
+      <h3>Inner Template - Sub : Hello Ace</h3>
+      <h4>Included Template : Hello Ace</h4>
+    </div>
+    <script type="text/javascript">
+      alert('Hello Ace');
+    </script>
+  </body>
+</html>
 ```
