@@ -62,9 +62,14 @@ func readFiles(bathPath, innerPath string, opts *Options) (*source, error) {
 
 // readFile reads a file and returns a file struct.
 func readFile(path string, opts *Options) (*file, error) {
-	data, err := ioutil.ReadFile(path + "." + opts.Extension)
-	if err != nil {
-		return nil, err
+	var data []byte
+	var err error
+
+	if path != "" {
+		data, err = ioutil.ReadFile(path + "." + opts.Extension)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	return NewFile(path, data), nil
