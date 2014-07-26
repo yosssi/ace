@@ -15,6 +15,9 @@ type Options struct {
 	DelimLeft string
 	// DelimRight represents a right delimiter for the html template.
 	DelimRight string
+	// Cache represents a flag which means whether Ace caches the parsed
+	// templates or no.
+	Cache bool
 }
 
 // initializeOptions initializes the options
