@@ -56,7 +56,7 @@ becomes
 
 ### Making use of the Go standard template package
 
-**Ace fully utilizes the strength of the [html/template](http://golang.org/pkg/html/template/) package.** You can embed [actions](http://golang.org/pkg/text/template/#hdr-Actions) of the template package in Ace templates. Ace also uses [nested template definitions](http://golang.org/pkg/text/template/#hdr-Nested_template_definitions) of the template package and Ace templates can pass [pipelines](http://golang.org/pkg/text/template/#hdr-Pipelines)(parameters) to other templates when they include them.
+**Ace fully utilizes the strength of the [html/template](http://golang.org/pkg/html/template/) package.** You can embed [actions](http://golang.org/pkg/text/template/#hdr-Actions) of the template package in Ace templates. Ace also uses [nested template definitions](http://golang.org/pkg/text/template/#hdr-Nested_template_definitions) of the template package and Ace templates can pass [pipelines](http://golang.org/pkg/text/template/#hdr-Pipelines)(parameters) to other templates which they include.
 
 ### Simple Syntax
 
