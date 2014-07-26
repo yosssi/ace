@@ -8,6 +8,51 @@ Ace is an HTML template engine for Go. This is inspired by [Slim](http://slim-la
 
 ## Example
 
+```ace
+= doctype html
+html lang=en
+  head
+    title Hello Ace
+    = css
+      h1 { color: blue; }
+  body
+    h1 {{.Msg}}
+    #container.wrapper
+      p..
+        Ace is an HTML template engine for Go.
+        This engine simplifies HTML coding in Go web application development.
+    = javascript
+      var msg = 'Welcome to Ace';
+      console.log(msg);
+```
+
+becomes
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hello Ace</title>
+    <style type="text/css">
+      h1 { color: blue; }
+    </style>
+  </head>
+  <body>
+    <h1>Hello Ace</h1>
+    <div id="container" class="wrapper">
+      <p>
+        Ace is an HTML template engine for Go.<br>
+        This engine simplifies HTML coding in Go web application development.
+      </p>
+    </div>
+    <script type="text/javascript">
+      var msg = 'Welcome to Ace';
+      console.log(msg);
+    </script>
+  </body>
+</html>
+```
+
 ## Installation
 
 ## Implementation Example
