@@ -60,11 +60,11 @@ becomes
 
 ### Simple Syntax
 
-Ace has a simple syntax and **this makes the HTML templates simple and light**.
+Ace has a simple syntax and **this makes template files simple and light**.
 
 ### Caching Function
 
-Ace has a caching function which caches the result data of the Ace templates parsing process. **You can omit the Ace templates parsing process and save template parsing time** by using this caching function. Using this caching function is recommended in production.
+Ace has a caching function which caches the result data of the Ace templates parsing process. **You can omit the Ace templates parsing process and save template parsing time** by using this function. Using this function is recommended in production.
 
 ### Binary Template Load Function
 
