@@ -24,7 +24,7 @@ becomes
 
 ## HTML Tags
 
-A word of a line head is interpreted as an HTML tag. The rest words of the same line is interpreted as attributes or a text. An attribute value which contains spaces must be surrounded by double quotes.
+A head word of a line is interpreted as an HTML tag. The rest words of the same line are interpreted as attributes or a text. An attribute value which contains spaces must be surrounded by double quotes.
 
 ```ace
 div id=container style="font-size: 12px; color: blue;"
