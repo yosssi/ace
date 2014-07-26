@@ -54,7 +54,7 @@ becomes
 
 ## Features
 
-### Making use of the Go standard template library
+### Making use of the Go standard template package
 
 **Ace fully utilizes the strength of the [html/template](http://golang.org/pkg/html/template/) package.** You can embed the [actions](http://golang.org/pkg/text/template/#hdr-Actions) of the template package in the Ace templates. Ace uses the [nested template definitions](http://golang.org/pkg/text/template/#hdr-Nested_template_definitions) of the template package in the Ace template include function and you can have the Ace templates pass the [pipelines](http://golang.org/pkg/text/template/#hdr-Pipelines) / parameters to the other templates which they include.
 
