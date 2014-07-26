@@ -43,6 +43,48 @@ becomes
 </div>
 ```
 
+Id and classes can be defined with a head word of a line.
+
+```ace
+p#foo.bar
+#container
+.wrapper
+```
+
+becomes
+
+```html
+<p id="foo" class="bar"></p>
+<div id="container"></div>
+<div class="wrapper"></div>
+```
+
+Block texts can be defined as a child element of an HTML tag.
+
+```ace
+script.
+  var msg = 'Hello Ace';
+  alert(msg);
+p..
+  This is a block text.
+  BR tags are inserted
+  automatically.
+```
+
+becomes
+
+```html
+<script>
+  var msg = 'Hello Ace';
+  alert(msg);
+</script>
+<p>
+  This is a block text.<br>
+  BR tags are inserted<br>
+  automatically.
+</p>
+```
+
 ## Plain Texts
 
 ## Helper Methods
