@@ -23,8 +23,7 @@ html lang=en
         Ace is an HTML template engine for Go.
         This engine simplifies HTML coding in Go web application development.
     = javascript
-      var msg = 'Welcome to Ace';
-      console.log(msg);
+      console.log('Welcome to Ace');
 ```
 
 becomes
@@ -47,8 +46,7 @@ becomes
       </p>
     </div>
     <script type="text/javascript">
-      var msg = 'Welcome to Ace';
-      console.log(msg);
+      console.log('Welcome to Ace');
     </script>
   </body>
 </html>
