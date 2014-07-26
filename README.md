@@ -54,44 +54,11 @@ becomes
 </html>
 ```
 
-## Installation
-
-```sh
-$ go get github.com/yosssi/ace
-```
-
-## Implementation Example
-
-```go
-package main
-
-import (
-	"net/http"
-
-	"github.com/yosssi/ace"
-)
-
-func handler(w http.ResponseWriter, r *http.Request) {
-	tpl, err := ace.ParseFiles("hello", "", nil) // Parse `hello.ace`.
-	if err != nil {
-		panic(err)
-	}
-	if err := tpl.Execute(w, map[string]string{"Msg": "Hello Ace"}); err != nil {
-		panic(err)
-	}
-}
-
-func main() {
-	http.HandleFunc("/", handler)
-	http.ListenAndServe(":8080", nil)
-}
-```
-
 ## Documentation
 
 You can get the documentation about Ace via the following channels:
 
-* [Documents](https://github.com/yosssi/ace/tree/master/docs)
+* [Documentation](https://github.com/yosssi/ace/tree/master/documentation)
 * [GoDoc](https://godoc.org/github.com/yosssi/ace)
 
 ## Official Information & Announcement
