@@ -71,7 +71,7 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	tpl, err := ace.ParseFiles("hello", "", nil)
+	tpl, err := ace.ParseFiles("hello", "", nil) // Parse `hello.ace`.
 	if err != nil {
 		panic(err)
 	}
