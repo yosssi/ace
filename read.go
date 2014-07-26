@@ -21,6 +21,7 @@ const (
 	dot          = "."
 	doubleDot    = dot + dot
 	colon        = ":"
+	doubleColon  = colon + colon
 	doubleQuote  = `"`
 	lt           = "<"
 	gt           = ">"
@@ -28,13 +29,12 @@ const (
 	hyphen       = "-"
 	bracketOpen  = "["
 	bracketClose = "]"
-	doubleColon  = "::"
 )
 
 // readFiles reads files and returns source for the parsing process.
-func readFiles(bathPath, innerPath string, opts *Options) (*source, error) {
+func readFiles(basePath, innerPath string, opts *Options) (*source, error) {
 	// Read the base file.
-	base, err := readFile(bathPath, opts)
+	base, err := readFile(basePath, opts)
 	if err != nil {
 		return nil, err
 	}

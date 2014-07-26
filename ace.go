@@ -3,12 +3,12 @@ package ace
 import "html/template"
 
 // ParseFiles parses template files and returns an HTML template.
-func ParseFiles(bathPath, innerPath string, opts *Options) (*template.Template, error) {
+func ParseFiles(basePath, innerPath string, opts *Options) (*template.Template, error) {
 	// Initialize the options.
 	opts = initializeOptions(opts)
 
 	// Read files.
-	src, err := readFiles(bathPath, innerPath, opts)
+	src, err := readFiles(basePath, innerPath, opts)
 	if err != nil {
 		return nil, err
 	}
@@ -20,5 +20,5 @@ func ParseFiles(bathPath, innerPath string, opts *Options) (*template.Template, 
 	}
 
 	// Compile the parsed result.
-	return compileResult(bathPath+colon+innerPath, rslt, opts)
+	return compileResult(basePath+colon+innerPath, rslt, opts)
 }
