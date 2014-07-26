@@ -21,7 +21,7 @@ func (e *plainTextInner) WriteTo(w io.Writer) (int64, error) {
 		s = e.ln.str[(e.parent.Base().ln.indent+1)*2:]
 	}
 
-	if e.insertBr {
+	if e.insertBr && !e.lastChild {
 		s += htmlBr
 	}
 

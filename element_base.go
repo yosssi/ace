@@ -4,12 +4,13 @@ import "bytes"
 
 // elementBase holds common fields for the elements.
 type elementBase struct {
-	ln       *line
-	rslt     *result
-	src      *source
-	parent   element
-	children []element
-	opts     *Options
+	ln        *line
+	rslt      *result
+	src       *source
+	parent    element
+	children  []element
+	opts      *Options
+	lastChild bool
 }
 
 // AppendChild appends the child element to the element.
@@ -43,9 +44,19 @@ func (e *elementBase) InsertBr() bool {
 	return false
 }
 
+// SetLastChild set the value to the last child field.
+func (e *elementBase) SetLastChild(lastChild bool) {
+	e.lastChild = lastChild
+}
+
 // writeChildren writes the children's HTML.
 func (e *elementBase) writeChildren(bf *bytes.Buffer) (int64, error) {
-	for _, child := range e.children {
+	l := len(e.children)
+	for index, child := range e.children {
+		if index == l-1 {
+			child.SetLastChild(true)
+		}
+
 		if i, err := child.WriteTo(bf); err != nil {
 			return int64(i), err
 		}

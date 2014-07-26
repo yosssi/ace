@@ -24,6 +24,7 @@ type element interface {
 	Base() *elementBase
 	CanHaveChildren() bool
 	InsertBr() bool
+	SetLastChild(lastChild bool)
 }
 
 // newElement creates and returns an element.
