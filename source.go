@@ -2,13 +2,13 @@ package ace
 
 // source represents source for the parsing process.
 type source struct {
-	base     *file
-	inner    *file
-	includes []*file
+	base     *File
+	inner    *File
+	includes []*File
 }
 
-// newSource creates and returns source.
-func newSource(base, inner *file, includes []*file) *source {
+// NewSource creates and returns source.
+func NewSource(base, inner *File, includes []*File) *source {
 	return &source{
 		base:     base,
 		inner:    inner,

@@ -14,8 +14,11 @@ const (
 	actionTemplateWithPipeline = `%stemplate "%s" %s%s`
 )
 
-// compileResult compiles the parsed result to the template.Template.
-func compileResult(name string, rslt *result, opts *Options) (*template.Template, error) {
+// CompileResult compiles the parsed result to the template.Template.
+func CompileResult(name string, rslt *result, opts *Options) (*template.Template, error) {
+	// Initialize the options.
+	opts = initializeOptions(opts)
+
 	var err error
 
 	// Create a buffer.

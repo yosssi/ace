@@ -16,7 +16,7 @@ type line struct {
 	indent int
 	tokens []string
 	opts   *Options
-	file   *file
+	file   *File
 }
 
 // isEmpty returns true if the line is empty.
@@ -91,7 +91,7 @@ func (l *line) childOf(parent element) (bool, error) {
 }
 
 // newLine creates and returns a line.
-func newLine(no int, str string, opts *Options, f *file) *line {
+func newLine(no int, str string, opts *Options, f *File) *line {
 	return &line{
 		no:     no,
 		str:    str,

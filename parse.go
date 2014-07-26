@@ -2,8 +2,11 @@ package ace
 
 import "strings"
 
-// parseSource parses the source and returns the result.
-func parseSource(src *source, opts *Options) (*result, error) {
+// ParseSource parses the source and returns the result.
+func ParseSource(src *source, opts *Options) (*result, error) {
+	// Initialize the options.
+	opts = initializeOptions(opts)
+
 	rslt := newResult(nil, nil, nil)
 
 	base, err := parseBytes(src.base.data, rslt, src, opts, src.base)
@@ -33,7 +36,7 @@ func parseSource(src *source, opts *Options) (*result, error) {
 }
 
 // parseBytes parses the byte data and returns the elements.
-func parseBytes(data []byte, rslt *result, src *source, opts *Options, f *file) ([]element, error) {
+func parseBytes(data []byte, rslt *result, src *source, opts *Options, f *File) ([]element, error) {
 	var elements []element
 
 	lines := strings.Split(formatLF(string(data)), lf)
@@ -75,7 +78,7 @@ func parseBytes(data []byte, rslt *result, src *source, opts *Options, f *file) 
 }
 
 // appendChildren parses the lines and appends the children to the element.
-func appendChildren(parent element, rslt *result, lines []string, i *int, l int, src *source, opts *Options, f *file) error {
+func appendChildren(parent element, rslt *result, lines []string, i *int, l int, src *source, opts *Options, f *File) error {
 	for *i < l {
 		// Fetch a line.
 		ln := newLine(*i+1, lines[*i], opts, f)

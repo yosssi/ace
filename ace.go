@@ -28,13 +28,13 @@ func ParseFiles(basePath, innerPath string, opts *Options) (*template.Template, 
 	}
 
 	// Parse the source.
-	rslt, err := parseSource(src, opts)
+	rslt, err := ParseSource(src, opts)
 	if err != nil {
 		return nil, err
 	}
 
 	// Compile the parsed result.
-	tpl, err := compileResult(name, rslt, opts)
+	tpl, err := CompileResult(name, rslt, opts)
 	if err != nil {
 		return nil, err
 	}

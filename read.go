@@ -46,7 +46,7 @@ func readFiles(basePath, innerPath string, opts *Options) (*source, error) {
 		return nil, err
 	}
 
-	var includes []*file
+	var includes []*File
 
 	// Find include files from the base file.
 	if err := findIncludes(base.data, opts, &includes, base); err != nil {
@@ -58,11 +58,11 @@ func readFiles(basePath, innerPath string, opts *Options) (*source, error) {
 		return nil, err
 	}
 
-	return newSource(base, inner, includes), nil
+	return NewSource(base, inner, includes), nil
 }
 
 // readFile reads a file and returns a file struct.
-func readFile(path string, opts *Options) (*file, error) {
+func readFile(path string, opts *Options) (*File, error) {
 	var data []byte
 	var err error
 
@@ -77,7 +77,7 @@ func readFile(path string, opts *Options) (*file, error) {
 }
 
 // findIncludes finds and adds include files.
-func findIncludes(data []byte, opts *Options, includes *[]*file, targetFile *file) error {
+func findIncludes(data []byte, opts *Options, includes *[]*File, targetFile *File) error {
 	includePaths, err := findIncludePaths(data, opts, targetFile)
 	if err != nil {
 		return err
@@ -102,7 +102,7 @@ func findIncludes(data []byte, opts *Options, includes *[]*file, targetFile *fil
 }
 
 // findIncludePaths finds and returns include paths.
-func findIncludePaths(data []byte, opts *Options, f *file) ([]string, error) {
+func findIncludePaths(data []byte, opts *Options, f *File) ([]string, error) {
 	var includePaths []string
 
 	for i, str := range strings.Split(formatLF(string(data)), lf) {
@@ -126,7 +126,7 @@ func formatLF(s string) string {
 }
 
 // hasFile return if files has a file which has the path specified by the parameter.
-func hasFile(files []*file, path string) bool {
+func hasFile(files []*File, path string) bool {
 	for _, f := range files {
 		if f.path == path {
 			return true
