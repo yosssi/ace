@@ -100,5 +100,3 @@ Run the above web application and access [localhost:8080](http://localhost:8080)
   </body>
 </html>
 ```
-
-![getting-started-sample](https://s3-ap-northeast-1.amazonaws.com/yosssi/ace/getting-started-sample.png)
