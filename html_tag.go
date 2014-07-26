@@ -9,10 +9,23 @@ import (
 
 // Tag names
 const (
-	tagNameBr   = "br"
-	tagNameDiv  = "div"
-	tagNameMeta = "meta"
+	tagNameBr    = "br"
+	tagNameDiv   = "div"
+	tagNameHr    = "hr"
+	tagNameImg   = "img"
+	tagNameInput = "input"
+	tagNameLink  = "link"
+	tagNameMeta  = "meta"
 )
+
+var noCloseTagNames = []string{
+	tagNameBr,
+	tagNameHr,
+	tagNameImg,
+	tagNameInput,
+	tagNameLink,
+	tagNameMeta,
+}
 
 // Attribute names
 const (
@@ -92,7 +105,7 @@ func (e *htmlTag) WriteTo(w io.Writer) (int64, error) {
 	}
 
 	// Write a close tag.
-	if e.tagName != tagNameBr && e.tagName != tagNameMeta {
+	if !e.noCloseTag() {
 		bf.WriteString(lt)
 		bf.WriteString(slash)
 		bf.WriteString(e.tagName)
@@ -187,6 +200,17 @@ func (e *htmlTag) setAttributes() error {
 	}
 
 	return nil
+}
+
+// noCloseTag returns true is the HTML tag has no close tag.
+func (e *htmlTag) noCloseTag() bool {
+	for _, name := range noCloseTagNames {
+		if e.tagName == name {
+			return true
+		}
+	}
+
+	return false
 }
 
 // newHTMLTag creates and returns an HTML tag.
