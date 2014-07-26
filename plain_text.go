@@ -49,9 +49,9 @@ func (e *plainText) InsertBr() bool {
 }
 
 // newPlainText creates and returns a plain text.
-func newPlainText(ln *line, src *source, parent element, opts *Options) *plainText {
+func newPlainText(ln *line, rslt *result, src *source, parent element, opts *Options) *plainText {
 	return &plainText{
-		elementBase: newElementBase(ln, src, parent, opts),
+		elementBase: newElementBase(ln, rslt, src, parent, opts),
 		insertBr:    ln.tokens[0] == doublePipe,
 	}
 }

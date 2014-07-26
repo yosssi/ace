@@ -39,13 +39,13 @@ func (e *helperMethodContent) WriteTo(w io.Writer) (int64, error) {
 }
 
 // newHelperMethodContent creates and returns a helper method content.
-func newHelperMethodContent(ln *line, src *source, parent element, opts *Options) (*helperMethodContent, error) {
+func newHelperMethodContent(ln *line, rslt *result, src *source, parent element, opts *Options) (*helperMethodContent, error) {
 	if len(ln.tokens) < 3 || ln.tokens[2] == "" {
 		return nil, fmt.Errorf("no name is specified [line: %d]", ln.no)
 	}
 
 	e := &helperMethodContent{
-		elementBase: newElementBase(ln, src, parent, opts),
+		elementBase: newElementBase(ln, rslt, src, parent, opts),
 		name:        ln.tokens[2],
 	}
 

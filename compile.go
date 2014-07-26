@@ -16,6 +16,8 @@ const (
 
 // compileResult compiles the parsed result to the template.Template.
 func compileResult(name string, rslt *result, opts *Options) (*template.Template, error) {
+	var err error
+
 	// Create a buffer.
 	baseBf := bytes.NewBuffer(nil)
 	innerBf := bytes.NewBuffer(nil)
@@ -29,7 +31,7 @@ func compileResult(name string, rslt *result, opts *Options) (*template.Template
 	}
 
 	for _, e := range rslt.inner {
-		if _, err := e.WriteTo(innerBf); err != nil {
+		if _, err = e.WriteTo(innerBf); err != nil {
 			return nil, err
 		}
 	}
@@ -41,7 +43,7 @@ func compileResult(name string, rslt *result, opts *Options) (*template.Template
 		bf.WriteString(fmt.Sprintf(actionDefine, opts.DelimLeft, path, opts.DelimRight))
 
 		for _, e := range elements {
-			if _, err := e.WriteTo(bf); err != nil {
+			if _, err = e.WriteTo(bf); err != nil {
 				return nil, err
 			}
 		}
@@ -52,15 +54,26 @@ func compileResult(name string, rslt *result, opts *Options) (*template.Template
 		includeBfs[path] = bf
 	}
 
-	fmt.Println(baseBf.String())
-	fmt.Println(innerBf.String())
-	for _, bf := range includeBfs {
-		fmt.Println(bf.String())
-	}
-
 	// Create a template.
 	t := template.New(name).Delims(opts.DelimLeft, opts.DelimRight)
 
 	// Parse a string to the template.
-	return t.Parse(baseBf.String())
+	t, err = t.Parse(baseBf.String())
+	if err != nil {
+		return nil, err
+	}
+
+	t, err = t.Parse(innerBf.String())
+	if err != nil {
+		return nil, err
+	}
+
+	for _, bf := range includeBfs {
+		t, err = t.Parse(bf.String())
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	return t, nil
 }

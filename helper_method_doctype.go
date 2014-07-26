@@ -30,7 +30,7 @@ func (e *helperMethodDoctype) WriteTo(w io.Writer) (int64, error) {
 }
 
 // newHelperMethodDoctype creates and returns a helper method doctype.
-func newHelperMethodDoctype(ln *line, src *source, parent element, opts *Options) (*helperMethodDoctype, error) {
+func newHelperMethodDoctype(ln *line, rslt *result, src *source, parent element, opts *Options) (*helperMethodDoctype, error) {
 	if len(ln.tokens) < 3 {
 		return nil, fmt.Errorf("doctype is not specified [line: %d]", ln.no)
 	}
@@ -42,7 +42,7 @@ func newHelperMethodDoctype(ln *line, src *source, parent element, opts *Options
 	}
 
 	e := &helperMethodDoctype{
-		elementBase: newElementBase(ln, src, parent, opts),
+		elementBase: newElementBase(ln, rslt, src, parent, opts),
 		doctype:     doctype,
 	}
 

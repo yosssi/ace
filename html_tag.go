@@ -189,7 +189,7 @@ func (e *htmlTag) setAttributes() error {
 }
 
 // newHTMLTag creates and returns an HTML tag.
-func newHTMLTag(ln *line, src *source, parent element, opts *Options) (*htmlTag, error) {
+func newHTMLTag(ln *line, rslt *result, src *source, parent element, opts *Options) (*htmlTag, error) {
 	if len(ln.tokens) < 1 {
 		return nil, fmt.Errorf("an HTML tag is not specified [line: %d]", ln.no)
 	}
@@ -206,7 +206,7 @@ func newHTMLTag(ln *line, src *source, parent element, opts *Options) (*htmlTag,
 	classes := extractClasses(s)
 
 	e := &htmlTag{
-		elementBase:      newElementBase(ln, src, parent, opts),
+		elementBase:      newElementBase(ln, rslt, src, parent, opts),
 		tagName:          tagName,
 		id:               id,
 		classes:          classes,

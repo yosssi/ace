@@ -69,7 +69,7 @@ func (e *helperMethodConditionalComment) ContainPlainText() bool {
 }
 
 // newHelperMethodConditionalComment creates and returns an HTML comment.
-func newHelperMethodConditionalComment(ln *line, src *source, parent element, opts *Options) (*helperMethodConditionalComment, error) {
+func newHelperMethodConditionalComment(ln *line, rslt *result, src *source, parent element, opts *Options) (*helperMethodConditionalComment, error) {
 	switch len(ln.tokens) {
 	case 2:
 		return nil, fmt.Errorf("no comment type is specified [line: %d]", ln.no)
@@ -84,7 +84,7 @@ func newHelperMethodConditionalComment(ln *line, src *source, parent element, op
 	}
 
 	e := &helperMethodConditionalComment{
-		elementBase: newElementBase(ln, src, parent, opts),
+		elementBase: newElementBase(ln, rslt, src, parent, opts),
 		commentType: commentType,
 		condition:   strings.Join(ln.tokens[3:], space),
 	}

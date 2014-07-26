@@ -44,8 +44,8 @@ func (e *helperMethodJavascript) ContainPlainText() bool {
 }
 
 // helperMethodJavascript creates and returns a helper method javascript.
-func newHelperMethodJavascript(ln *line, src *source, parent element, opts *Options) *helperMethodJavascript {
+func newHelperMethodJavascript(ln *line, rslt *result, src *source, parent element, opts *Options) *helperMethodJavascript {
 	return &helperMethodJavascript{
-		elementBase: newElementBase(ln, src, parent, opts),
+		elementBase: newElementBase(ln, rslt, src, parent, opts),
 	}
 }

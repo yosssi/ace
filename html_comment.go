@@ -57,8 +57,8 @@ func (e *htmlComment) ContainPlainText() bool {
 }
 
 // newHTMLComment creates and returns an HTML comment.
-func newHTMLComment(ln *line, src *source, parent element, opts *Options) *htmlComment {
+func newHTMLComment(ln *line, rslt *result, src *source, parent element, opts *Options) *htmlComment {
 	return &htmlComment{
-		elementBase: newElementBase(ln, src, parent, opts),
+		elementBase: newElementBase(ln, rslt, src, parent, opts),
 	}
 }
