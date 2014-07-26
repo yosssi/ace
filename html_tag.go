@@ -18,6 +18,13 @@ const (
 	tagNameMeta  = "meta"
 )
 
+// Attribute names
+const (
+	attributeNameID    = "id"
+	attributeNameClass = "class"
+)
+
+// No close tag names
 var noCloseTagNames = []string{
 	tagNameBr,
 	tagNameHr,
@@ -26,12 +33,6 @@ var noCloseTagNames = []string{
 	tagNameLink,
 	tagNameMeta,
 }
-
-// Attribute names
-const (
-	attributeNameID    = "id"
-	attributeNameClass = "class"
-)
 
 // htmlTag represents an HTML tag.
 type htmlTag struct {
