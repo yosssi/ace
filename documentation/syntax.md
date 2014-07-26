@@ -30,6 +30,7 @@ A head word of a line is interpreted as an HTML tag. The rest words of the same 
 div id=container style="font-size: 12px; color: blue;"
   p class=row This is interpreted as a text.
   a href=https://github.com/ Go to GitHub
+  input type=checkbox checked=
 ```
 
 becomes
@@ -38,6 +39,7 @@ becomes
 <div id="container" style="font-size: 12px; color: blue;">
   <p class="row">This is interpreted as a text.</p>
   <a href="https://github.com/">Go to GitHub</a>
+  <input type="checkbox" checked>
 </div>
 ```
 
