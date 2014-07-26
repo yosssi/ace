@@ -9,8 +9,9 @@ import (
 
 // Tag names
 const (
-	tagNameDiv = "div"
-	tagNameBr  = "br"
+	tagNameBr   = "br"
+	tagNameDiv  = "div"
+	tagNameMeta = "meta"
 )
 
 // Attribute names
@@ -91,7 +92,7 @@ func (e *htmlTag) WriteTo(w io.Writer) (int64, error) {
 	}
 
 	// Write a close tag.
-	if e.tagName != tagNameBr {
+	if e.tagName != tagNameBr && e.tagName != tagNameMeta {
 		bf.WriteString(lt)
 		bf.WriteString(slash)
 		bf.WriteString(e.tagName)
