@@ -61,6 +61,31 @@ $ go get github.com/yosssi/ace/...
 
 ## Implementation Example
 
+```go
+package main
+
+import (
+	"net/http"
+
+	"github.com/yosssi/ace"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	tpl, err := ace.ParseFiles("hello", "", nil)
+	if err != nil {
+		panic(err)
+	}
+	if err := tpl.Execute(w, map[string]string{"Msg": "Hello Ace"}); err != nil {
+		panic(err)
+	}
+}
+
+func main() {
+	http.HandleFunc("/", handler)
+	http.ListenAndServe(":8080", nil)
+}
+```
+
 ## Documentation
 
 You can get the documentation about Ace via the following channels:
