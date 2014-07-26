@@ -3,6 +3,7 @@ package ace
 import (
 	"fmt"
 	"io/ioutil"
+	"path/filepath"
 	"strings"
 )
 
@@ -66,7 +67,7 @@ func readFile(path string, opts *Options) (*file, error) {
 	var err error
 
 	if path != "" {
-		data, err = ioutil.ReadFile(path + "." + opts.Extension)
+		data, err = ioutil.ReadFile(filepath.Join(opts.BaseDir, path+"."+opts.Extension))
 		if err != nil {
 			return nil, err
 		}

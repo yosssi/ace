@@ -18,6 +18,8 @@ type Options struct {
 	// Cache represents a flag which means whether Ace caches the parsed
 	// templates or no.
 	Cache bool
+	// BaseDir represents a base directory of the Ace templates.
+	BaseDir string
 }
 
 // initializeOptions initializes the options
