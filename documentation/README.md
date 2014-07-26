@@ -1,3 +1,3 @@
 # Documentation
 
-* [Getting Started](https://github.com/yosssi/ace/blob/master/docs/getting-started.md)
+* [Getting Started](https://github.com/yosssi/ace/blob/master/documentation/getting-started.md)
