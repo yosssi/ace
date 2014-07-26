@@ -24,22 +24,20 @@ becomes
 
 ## HTML Tags
 
-A line head is interpreted as an HTML tag.
+A word of a line head is interpreted as an HTML tag. The rest words of the same line is interpreted as attributes or a text. An attribute value which contains spaces must be surrounded by double quotes.
 
 ```ace
-div
-  address
-  i
-  strong
+div id=container style="font-size: 12px; color: blue;"
+  p class=row This is interpreted as a text.
+  a href=https://github.com/ Go to GitHub
 ```
 
 becomes
 
 ```html
-<div>
-  <address></address>
-  <i></i>
-  <strong></strong>
+<div id="container" style="font-size: 12px; color: blue;">
+  <p class="row">This is interpreted as a text.</p>
+  <a href="https://github.com/">Go to GitHub</a>
 </div>
 ```
 
