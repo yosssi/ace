@@ -116,4 +116,4 @@ You can discuss Ace and contact the Ace development team via the following chann
 ## Tools
 
 * HTML2Ace (Under construction)
-* vim-ace - Vim syntax highlighting for Ace templates
+* [vim-ace](https://github.com/yosssi/vim-ace) - Vim syntax highlighting for Ace templates
