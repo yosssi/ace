@@ -74,8 +74,8 @@ Ace has a binary template load function which loads Ace templates from binary da
 
 You can get the documentation about Ace via the following channels:
 
-* [Documentation](https://github.com/yosssi/ace/tree/master/documentation)
-* [GoDoc](https://godoc.org/github.com/yosssi/ace)
+* [Documentation](https://github.com/yosssi/ace/tree/master/documentation) - includes the getting started guide and the syntax documentation.
+* [GoDoc](https://godoc.org/github.com/yosssi/ace) - includes the API docuemntation.
 
 ## Official Information & Announcement
 
