@@ -16,8 +16,14 @@ func (e *htmlComment) WriteTo(w io.Writer) (int64, error) {
 	var bf bytes.Buffer
 
 	// Write an open tag.
+	bf.WriteString(e.opts.DelimLeft)
+	bf.WriteString(preDefinedFuncNameHTML)
+	bf.WriteString(space)
+	bf.WriteString(doubleQuote)
 	bf.WriteString(lt)
 	bf.WriteString(exclamation)
+	bf.WriteString(doubleQuote)
+	bf.WriteString(e.opts.DelimRight)
 	bf.WriteString(hyphen)
 	bf.WriteString(hyphen)
 
@@ -48,7 +54,6 @@ func (e *htmlComment) WriteTo(w io.Writer) (int64, error) {
 	i, err := w.Write(bf.Bytes())
 
 	return int64(i), err
-
 }
 
 // ContainPlainText returns true.

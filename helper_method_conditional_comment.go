@@ -26,8 +26,14 @@ func (e *helperMethodConditionalComment) WriteTo(w io.Writer) (int64, error) {
 	var bf bytes.Buffer
 
 	// Write an open tag.
+	bf.WriteString(e.opts.DelimLeft)
+	bf.WriteString(preDefinedFuncNameHTML)
+	bf.WriteString(space)
+	bf.WriteString(doubleQuote)
 	bf.WriteString(lt)
 	bf.WriteString(exclamation)
+	bf.WriteString(doubleQuote)
+	bf.WriteString(e.opts.DelimRight)
 	if e.commentType == commentTypeHidden {
 		bf.WriteString(hyphen)
 		bf.WriteString(hyphen)
@@ -46,8 +52,14 @@ func (e *helperMethodConditionalComment) WriteTo(w io.Writer) (int64, error) {
 	}
 
 	// Write a close tag.
+	bf.WriteString(e.opts.DelimLeft)
+	bf.WriteString(preDefinedFuncNameHTML)
+	bf.WriteString(space)
+	bf.WriteString(doubleQuote)
 	bf.WriteString(lt)
 	bf.WriteString(exclamation)
+	bf.WriteString(doubleQuote)
+	bf.WriteString(e.opts.DelimRight)
 	bf.WriteString(bracketOpen)
 	bf.WriteString("endif")
 	bf.WriteString(bracketClose)

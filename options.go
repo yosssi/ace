@@ -1,5 +1,7 @@
 package ace
 
+import "html/template"
+
 // Defaults
 const (
 	defaultExtension  = "ace"
@@ -24,6 +26,9 @@ type Options struct {
 	// If this function is set, Ace load the template data from
 	// this function instead of the template files.
 	Asset func(name string) ([]byte, error)
+	// FuncMap represents a template.FuncMap which is set to
+	// the result template.
+	FuncMap template.FuncMap
 }
 
 // initializeOptions initializes the options

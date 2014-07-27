@@ -14,6 +14,11 @@ const (
 	actionTemplateWithPipeline = `%stemplate "%s" %s%s`
 )
 
+// PreDefinedFuncs
+const (
+	preDefinedFuncNameHTML = "HTML"
+)
+
 // CompileResult compiles the parsed result to the template.Template.
 func CompileResult(name string, rslt *result, opts *Options) (*template.Template, error) {
 	// Initialize the options.
@@ -59,6 +64,15 @@ func CompileResult(name string, rslt *result, opts *Options) (*template.Template
 
 	// Create a template.
 	t := template.New(name).Delims(opts.DelimLeft, opts.DelimRight)
+
+	// Set FuncMaps.
+	t.Funcs(template.FuncMap{
+		preDefinedFuncNameHTML: func(s string) template.HTML {
+			return template.HTML(s)
+		},
+	})
+
+	t.Funcs(opts.FuncMap)
 
 	// Parse a string to the template.
 	t, err = t.Parse(baseBf.String())
