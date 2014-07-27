@@ -19,7 +19,7 @@ func (e *plainText) WriteTo(w io.Writer) (int64, error) {
 	// Write the plain text.
 	bf.WriteString(strings.Join(e.ln.tokens[1:], space))
 
-	if e.insertBr {
+	if len(e.ln.tokens) > 1 && e.insertBr {
 		bf.WriteString(htmlBr)
 	}
 
