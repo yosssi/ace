@@ -145,7 +145,23 @@ The following comment types are acceptable:
 | hidden       | <!--[if expression]> HTML <![endif]--> |
 | revealed     | <![if expression]> HTML <![endif]>     |
 
+```ace
+= conditionalComment hidden IE 6
+  <p>You are using Internet Explorer 6.</p>
+= conditionalComment revealed !IE
+  <link href="non-ie.css" rel="stylesheet">
+```
 
+becomes
+
+```html
+<!--[if IE 6]>
+  <p>You are using Internet Explorer 6.</p>
+<![endif]-->
+<![if !IE]>
+  <link href="non-ie.css" rel="stylesheet">
+<![endif]>
+```
 
 ## Comments
 
