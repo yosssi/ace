@@ -60,10 +60,12 @@ import (
 func handler(w http.ResponseWriter, r *http.Request) {
 	tpl, err := ace.ParseFiles("base", "inner", nil)
 	if err != nil {
-		panic(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 	if err := tpl.Execute(w, map[string]string{"Msg": "Hello Ace"}); err != nil {
-		panic(err)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 }
 
