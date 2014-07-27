@@ -1,6 +1,6 @@
 # Load Templates from Binary Data
 
-This example shows how to load templates from binary data.
+This example shows how to load templates from binary data instead of template files.
 
 You can run this example web application by executing the following command.
 
