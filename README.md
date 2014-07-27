@@ -70,6 +70,13 @@ Ace has a caching function which caches the result data of the templates parsing
 
 Ace has a binary template load function which loads Ace templates from binary data instead of template files. **You can compile your web application into one binary file** by using this function. [go-bindata](https://github.com/jteeuwen/go-bindata) is the best for generating binary data from template files.
 
+## Getting Started
+
+Please check the following documentation.
+
+* [Getting Started](https://github.com/yosssi/ace/blob/master/documentation/getting-started.md) - shows the getting started guide.
+* [Examples](https://github.com/yosssi/ace/tree/master/examples) - shows the examples of the web applications which uses Ace template engine.
+
 ## Documentation
 
 You can get the documentation about Ace via the following channels:
