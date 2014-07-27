@@ -165,7 +165,7 @@ becomes
 
 ### Content Helper Method
 
-A content helper method defines a block content which is embedded in the base template. This helper method must be uses only in the inner template.
+A content helper method defines a block content which is embedded in the base template. This helper method must be used only in the inner template.
 
 ```
 = content main
@@ -243,6 +243,36 @@ An include helper method includes another template. You can pass a pipeline (par
 = include templatePathWithoutExtension pipeline
 ```
 
+### Javascript Helper Method
+
+A javascript helper method generates a script tag which has "text/javascript" type.
+
+```ace
+= javascript
+  var msg = 'Hello Ace';
+  alert(msg);
+```
+
+becomes
+
+```html
+<script type="text/javascript">
+  var msg = 'Hello Ace';
+  alert(msg);
+</script>
+```
+
+### Yield Helper Method
+
+A yield helper method generates the HTML tags which are defined in the inner template. This helper method must be used only in the base template.
+
+```
+= yield main
+  | This message is renderd if the "main" content is not defined in the inner template.
+
+= yield sub
+  | This message is renderd if the "sub" content is not defined in the inner template.
+```
 
 ## Comments
 
