@@ -68,7 +68,7 @@ Ace has a caching function which caches the result data of the templates parsing
 
 ### Binary Template Load Function
 
-Ace has a binary template load function which loads Ace templates from binary data instead of template files. **You can compile your web application into one binary file** by using this function. [go-bindata](https://github.com/jteeuwen/go-bindata) is the best for generating binary data from template files.
+Ace has a binary template load function which loads Ace templates from binary data in memory instead of template files on disk. **You can compile your web application into one binary file** by using this function. [go-bindata](https://github.com/jteeuwen/go-bindata) is the best for generating binary data from template files.
 
 ## Getting Started
 
