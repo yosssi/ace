@@ -81,7 +81,6 @@ You can get the documentation about Ace via the following channels:
 
 You can get the official information and announcement about Ace via the following channels:
 
-* Website (Under construction)
 * [Twitter](https://twitter.com/acehtml)
 * [Google Group](https://groups.google.com/forum/#!forum/acehtml)
 
@@ -99,4 +98,3 @@ You can discuss Ace and contact the Ace development team via the following chann
 ## Tools
 
 * [vim-ace](https://github.com/yosssi/vim-ace) - Vim syntax highlighting for Ace templates
-* HTML2Ace (Under construction)
