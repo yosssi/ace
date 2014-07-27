@@ -102,6 +102,10 @@ You can discuss Ace and contact the Ace development team via the following chann
 * [Keiji Yoshida (Author of Ace)'s Twitter](https://twitter.com/_yosssi)
 * [Keiji Yoshida (Author of Ace)'s Email](mailto:yoshida.keiji.84@gmail.com)
 
+## Contributions
+
+Any contributions are welcome. Please feel free to create an issue or send a pull request.
+
 ## Tools
 
 * [vim-ace](https://github.com/yosssi/vim-ace) - Vim syntax highlighting for Ace templates
