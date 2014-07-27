@@ -24,7 +24,7 @@ becomes
 
 ## HTML Tags
 
-A head word of a line is interpreted as an HTML tag. The rest words of the same line are interpreted as attributes or a text. An attribute value which contains spaces must be surrounded by double quotes.
+A head word of a line is interpreted as an HTML tag. The rest words of the same line are interpreted as attributes or a text. An attribute value which contains spaces must be surrounded by double quotes. An attribute without value (like "check" and "required") can be defined by specifying no value and ending with an equal (=).
 
 ```ace
 div id=container style="font-size: 12px; color: blue;"
@@ -43,7 +43,7 @@ becomes
 </div>
 ```
 
-Id and classes can be defined with a head word of a line.
+ID and classes can be defined with a head word of a line.
 
 ```ace
 p#foo.bar
@@ -59,7 +59,7 @@ becomes
 <div class="wrapper"></div>
 ```
 
-Block texts can be defined as a child element of an HTML tag by appending a dot (.) to the head word of a line. BR tags are inserted to each line except for the last line by appending double dot (..) to the head word of a line.
+Block texts can be defined as a child element of an HTML tag by appending a dot (.) or double dot (..) to the head word of a line. BR tags are inserted to each line except for the last line by appending a double dot (..) to the head word of a line.
 
 ```ace
 script.
@@ -86,6 +86,37 @@ becomes
 ```
 
 ## Plain Texts
+
+A line which starts with a pipe (|) or double pipe (||) is interpreted as plain texts. BR tags are inserted to each line except for the last line by having a line start with a double pipe (||).
+
+```ace
+div
+  | This is a single line.
+div
+  |
+    This is a
+    block line.
+div
+  ||
+    This is a
+    block line
+    with BR tags.
+```
+
+becomes
+
+```html
+<div>This is a single line.</div>
+<div>
+  This is a
+  block line.
+</div>
+<div>
+  This is a<br>
+  block line<br>
+  with BR tags.
+</div>
+```
 
 ## Helper Methods
 
