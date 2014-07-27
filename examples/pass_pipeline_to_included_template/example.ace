@@ -9,4 +9,3 @@ html lang=en
       {{range .Pets}}
         = include pet .
       {{end}}
-
