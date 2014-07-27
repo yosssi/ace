@@ -1,3 +1,3 @@
-# Single Template
+# Base and Inner Template
 
-This example shows how to build a web application which uses a single Ace template file.
+This example shows how to use a base and inner Ace template file.
