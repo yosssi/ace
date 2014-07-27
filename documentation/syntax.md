@@ -313,7 +313,7 @@ body
 
 The following functions are predefined.
 
-### HTML
+### HTML function
 
 "HTML" function returns a non-escaped stirng.
 
