@@ -106,7 +106,9 @@ div
 becomes
 
 ```html
-<div>This is a single line.</div>
+<div>
+  This is a single line.
+</div>
 <div>
   This is a
   block line.
