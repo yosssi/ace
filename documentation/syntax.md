@@ -163,6 +163,18 @@ becomes
 <![endif]>
 ```
 
+### Content Helper Method
+
+A content helper method defines a block content which is embedded in the base template. This helper method must be uses only in the inner template.
+
+```
+= content main
+  h2 Inner Template - Main : {{.Msg}}
+
+= content sub
+  h3 Inner Template - Sub : {{.Msg}}
+```
+
 ## Comments
 
 ## Actions
