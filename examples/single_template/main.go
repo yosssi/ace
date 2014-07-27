@@ -10,9 +10,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	tpl, err := ace.ParseFiles("example", "", nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 	if err := tpl.Execute(w, nil); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
 	}
 }
 
