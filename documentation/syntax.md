@@ -268,10 +268,10 @@ A yield helper method generates the HTML tags which are defined in the inner tem
 
 ```
 = yield main
-  | This message is renderd if the "main" content is not defined in the inner template.
+  | This message is rendered if the "main" content is not defined in the inner template.
 
 = yield sub
-  | This message is renderd if the "sub" content is not defined in the inner template.
+  | This message is rendered if the "sub" content is not defined in the inner template.
 ```
 
 ## Comments
