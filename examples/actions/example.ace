@@ -9,3 +9,7 @@ html lang=en
       {{range .Msgs}}
         li {{.}}
       {{end}}
+    div
+      {{"<div>Escaped String</div>"}}
+    div
+      {{HTML "<div>Non-Escaped String</div>"}}
