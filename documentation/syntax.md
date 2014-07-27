@@ -175,6 +175,35 @@ A content helper method defines a block content which is embedded in the base te
   h3 Inner Template - Sub : {{.Msg}}
 ```
 
+### CSS Helper Method
+
+A css helper method generates a style tag which has "text/css" type.
+
+```ace
+= css
+  body {
+    margin: 0;
+  }
+  h1 {
+    font-size: 200%;
+    color: blue;
+  }
+```
+
+becomes
+
+```html
+<style type="text/css">
+  body {
+    margin: 0;
+  }
+  h1 {
+    font-size: 200%;
+    color: blue;
+  }
+</style>
+```
+
 ## Comments
 
 ## Actions
