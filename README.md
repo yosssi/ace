@@ -75,7 +75,7 @@ Ace has a binary template load function which loads Ace templates from binary da
 Please check the following documentation.
 
 * [Getting Started](https://github.com/yosssi/ace/blob/master/documentation/getting-started.md) - shows the getting started guide.
-* [Examples](https://github.com/yosssi/ace/tree/master/examples) - shows the examples of the web applications which uses Ace template engine.
+* [Examples](https://github.com/yosssi/ace/tree/master/examples) - shows the examples of the web applications which use the Ace template engine.
 
 ## Documentation
 
