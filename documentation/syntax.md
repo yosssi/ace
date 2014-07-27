@@ -59,7 +59,7 @@ becomes
 <div class="wrapper"></div>
 ```
 
-Block texts can be defined as a child element of an HTML tag.
+Block texts can be defined as a child element of an HTML tag by appending a dot (.) to the head word of a line. BR tags are inserted to each line except for the last line by appending double dot (..) to the head word of a line.
 
 ```ace
 script.
