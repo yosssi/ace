@@ -104,7 +104,7 @@ You can discuss Ace and contact the Ace development team via the following chann
 
 ## Contributions
 
-Any contributions are welcome. Please feel free to create an issue or send a pull request.
+**Any contributions are welcome.** Please feel free to [create an issue](https://github.com/yosssi/ace/issues/new) or [send a pull request](https://github.com/yosssi/ace/compare/).
 
 ## Tools
 
