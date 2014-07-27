@@ -175,7 +175,7 @@ func (e *htmlTag) setAttributes() error {
 		}
 
 		k := kv[0]
-		v := kv[1]
+		v := strings.Join(kv[1:], equal)
 
 		// Remove the prefix and suffix of the double quotes.
 		if len(v) > 1 && strings.HasPrefix(v, doubleQuote) && strings.HasSuffix(v, doubleQuote) {
