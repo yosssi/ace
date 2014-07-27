@@ -300,3 +300,31 @@ becomes
 ```
 
 ## Actions
+
+[Actions](http://golang.org/pkg/text/template/#hdr-Actions) of the template package can be embedded in Ace templates.
+
+```ace
+body
+  h1 Base Template : {{.Msg}}
+  {{if true}}
+    p Conditional block
+  {{end}}
+```
+
+The following functions are predefined.
+
+### HTML
+
+"HTML" function returns a non-escaped stirng.
+
+```ace
+{{"<div>"}}
+{{HTML "<div>"}}
+```
+
+becomes
+
+```html
+&lt;br&gt;
+<br>
+```
