@@ -1,4 +1,4 @@
-# Load templates from binary data
+# Load Templates from Binary Data
 
 This example shows how to load templates from binary data.
 

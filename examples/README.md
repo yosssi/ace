@@ -16,4 +16,5 @@ This documentation shows the examples of the web applications which use the Ace 
 ## Advanced
 
 * [Cache](https://github.com/yosssi/ace/tree/master/examples/cache)
-* [Load templates from binary data](https://github.com/yosssi/ace/tree/master/examples/load_templates_from_binary_data)
+* [Load Templates from Binary Data](https://github.com/yosssi/ace/tree/master/examples/load_templates_from_binary_data)
+* [Pass a Pipeline (Parameter) to the Included Template](https://github.com/yosssi/ace/tree/master/examples/pass_pipeline_to_included_template)
