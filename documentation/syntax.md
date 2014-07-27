@@ -141,7 +141,7 @@ A conditional comment helper method generates a [conditional comment](http://en.
 The following comment types are acceptable:
 
 | Comment Type | Generated HTML                         |
-| ------------ |:--------------------------------------:|
+| ------------ |----------------------------------------|
 | hidden       | <!--[if expression]> HTML <![endif]--> |
 | revealed     | <![if expression]> HTML <![endif]>     |
 
@@ -214,8 +214,8 @@ A doctype helper method generates a doctype tag.
 
 The following doctype names are acceptable:
 
-| Doctype Name | Generated HTML                         |
-| ------------ |:--------------------------------------:|
+| Doctype Name | Generated HTML |
+| ------------ |--------------------------------------|
 | html       | <!DOCTYPE html> |
 | xml     | <?xml version="1.0" encoding="utf-8" ?> |
 | transitional     | <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> |
@@ -225,7 +225,15 @@ The following doctype names are acceptable:
 | basic     | <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd"> |
 | mobile     | <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd"> |
 
+```ace
+= doctype html
+```
 
+becomes
+
+```html
+<!DOCTYPE html>
+```
 
 ## Comments
 
