@@ -64,7 +64,7 @@ Ace has a simple syntax and **this makes template files simple and light**.
 
 ### Caching Function
 
-Ace has a caching function which caches the result data of the templates parsing process. **You can omit the templates parsing process and save template parsing time** by using this function. Using this function is recommended in production.
+Ace has a caching function which caches the result data of the templates parsing process. **You can omit the templates parsing process and save template parsing time** by using this function. **Using this function is recommended in production.**
 
 ### Binary Template Load Function
 
