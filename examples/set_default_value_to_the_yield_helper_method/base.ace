@@ -8,4 +8,4 @@ html lang=en
     = yield main
       | This message is rendered if the "main" content is not defined in the inner template.
     = yield sub
-       | This message is rendered if the "sub" content is not defined in the inner template.
+      | This message is rendered if the "sub" content is not defined in the inner template.
