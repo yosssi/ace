@@ -8,4 +8,4 @@ You can run this example web application by executing the following command.
 $ go run main.go asset.go
 ```
 
-`asset.go` is created by executing `make_asset.sh`. `make_asset.sh` executes [go-bindata](https://github.com/jteeuwen/go-bindata) and generates binary data from the Ace template.
+`asset.go` is created by executing `make_asset.sh`. This shell script executes [go-bindata](https://github.com/jteeuwen/go-bindata) and generates binary data from the Ace template.
