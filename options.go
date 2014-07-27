@@ -18,7 +18,8 @@ type Options struct {
 	// DelimRight represents a right delimiter for the html template.
 	DelimRight string
 	// Cache represents a flag which means whether Ace caches the parsed
-	// templates or no.
+	// templates or not.
+	// This option should be true in production.
 	Cache bool
 	// BaseDir represents a base directory of the Ace templates.
 	BaseDir string
