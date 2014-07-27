@@ -87,7 +87,7 @@ becomes
 
 ## Plain Texts
 
-A line which starts with a pipe (|) or double pipe (||) is interpreted as plain texts. BR tags are inserted to each line except for the last line by having a line start with a double pipe (||).
+A line which starts with a pipe (|) or double pipe (||) is interpreted as a block of plain texts. BR tags are inserted to each line except for the last line by having a line start with a double pipe (||).
 
 ```ace
 div
@@ -121,6 +121,31 @@ becomes
 ```
 
 ## Helper Methods
+
+A line which starts withs an equal (=) is interpreted as a helper method.
+
+```ace
+= helperMethodName
+```
+
+The following helper methods are available.
+
+### Conditional Comment Helper Method
+
+A conditional comment helper method generates a [conditional comment](http://en.wikipedia.org/wiki/Conditional_comment).
+
+```ace
+= conditionalComment commentType condition
+```
+
+The following comment types are acceptable:
+
+| Comment Type | Generated HTML                         |
+| ------------ |:--------------------------------------:|
+| hidden       | <!--[if expression]> HTML <![endif]--> |
+| revealed     | <![if expression]> HTML <![endif]>     |
+
+
 
 ## Comments
 
