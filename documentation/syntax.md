@@ -276,4 +276,27 @@ A yield helper method generates the HTML tags which are defined in the inner tem
 
 ## Comments
 
+A line which starts with a slash (/) or double slash (//) is interpreted as a comment. A line which starts with a slash (/) is not rendered. A line which starts with a double slash (//) is renderd as an HTML comment.
+
+```ace
+/ This is a single line comment which is not rendered.
+/
+  This is a multiple lines comment
+  which is not rendered.
+// This is a single line comment which is rendered as an HTML comment.
+//
+  This is a multiple lines comment
+  which is rendered as an HTML comment.
+```
+
+becomes
+
+```html
+<!-- This is a single line comment which is rendered as an HTML comment. -->
+<!--
+  This is a multiple lines comment
+  which is rendered as an HTML comment.
+-->
+```
+
 ## Actions
