@@ -235,6 +235,15 @@ becomes
 <!DOCTYPE html>
 ```
 
+### Include Helper Method
+
+An include helper method includes another template. You can pass a pipeline (parameter) from the including template to the included template.
+
+```ace
+= include templatePathWithoutExtension pipeline
+```
+
+
 ## Comments
 
 ## Actions
