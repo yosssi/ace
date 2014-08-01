@@ -106,6 +106,10 @@ You can discuss Ace and contact the Ace development team via the following chann
 
 **Any contributions are welcome.** Please feel free to [create an issue](https://github.com/yosssi/ace/issues/new) or [send a pull request](https://github.com/yosssi/ace/compare/).
 
+## Renderers for web frameworks
+
+* [Martini Acerender](https://github.com/yosssi/martini-acerender) - Renderer for [Martini](http://martini.codegangsta.io/)
+
 ## Tools
 
 * [vim-ace](https://github.com/yosssi/vim-ace) - Vim syntax highlighting for Ace templates
