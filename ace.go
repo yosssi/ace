@@ -8,14 +8,15 @@ import (
 var cache = make(map[string]template.Template)
 var cacheMutex = new(sync.RWMutex)
 
-// ParseFiles parses template files and returns an HTML template.
-func ParseFiles(basePath, innerPath string, opts *Options) (*template.Template, error) {
+// Load loads and returns an HTML template. Each Ace templates are parsed only once
+// and cached if the "DynamicReload" option are not set.
+func Load(basePath, innerPath string, opts *Options) (*template.Template, error) {
 	// Initialize the options.
 	opts = initializeOptions(opts)
 
 	name := basePath + colon + innerPath
 
-	if opts.Cache {
+	if !opts.DynamicReload {
 		if tpl, ok := getCache(name); ok {
 			return &tpl, nil
 		}
@@ -39,7 +40,7 @@ func ParseFiles(basePath, innerPath string, opts *Options) (*template.Template, 
 		return nil, err
 	}
 
-	if opts.Cache {
+	if !opts.DynamicReload {
 		setCache(name, *tpl)
 	}
 

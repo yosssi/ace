@@ -13,7 +13,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 			return "Hello " + s
 		},
 	}
-	tpl, err := ace.ParseFiles("example", "", &ace.Options{
+	tpl, err := ace.Load("example", "", &ace.Options{
 		FuncMap: funcMap,
 	})
 	if err != nil {

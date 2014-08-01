@@ -17,10 +17,10 @@ type Options struct {
 	DelimLeft string
 	// DelimRight represents a right delimiter for the html template.
 	DelimRight string
-	// Cache represents a flag which means whether Ace caches the parsed
-	// templates or not.
-	// This option should be true in production.
-	Cache bool
+	// DynamicReload represents a flag which means whether Ace reloads
+	// templates dynamically.
+	// This option should only be true in development.
+	DynamicReload bool
 	// BaseDir represents a base directory of the Ace templates.
 	BaseDir string
 	// Asset loads and returns the asset for the given name.

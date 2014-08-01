@@ -7,7 +7,7 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	tpl, err := ace.ParseFiles("views/example", "", &ace.Options{
+	tpl, err := ace.Load("views/example", "", &ace.Options{
 		Asset: Asset,
 	})
 	if err != nil {

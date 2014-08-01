@@ -7,7 +7,7 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	tpl, err := ace.ParseFiles("example", "", &ace.Options{
+	tpl, err := ace.Load("example", "", &ace.Options{
 		DelimLeft:  "<%",
 		DelimRight: "%>",
 	})

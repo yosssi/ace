@@ -58,7 +58,7 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	tpl, err := ace.ParseFiles("base", "inner", nil)
+	tpl, err := ace.Load("base", "inner", nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

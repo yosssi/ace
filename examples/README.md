@@ -15,7 +15,7 @@ This documentation shows the examples of the web applications which use the Ace 
 
 ## Advanced
 
-* [Cache](https://github.com/yosssi/ace/tree/master/examples/cache)
+* [Dynamic Reload](https://github.com/yosssi/ace/tree/master/examples/dynamic_reload)
 * [Load Templates from Binary Data](https://github.com/yosssi/ace/tree/master/examples/load_templates_from_binary_data)
 * [Pass a Pipeline (Parameter) to the Included Template](https://github.com/yosssi/ace/tree/master/examples/pass_pipeline_to_included_template)
 * [Set a Default Value to the Yield Helper Method](https://github.com/yosssi/ace/tree/master/examples/set_default_value_to_the_yield_helper_method)

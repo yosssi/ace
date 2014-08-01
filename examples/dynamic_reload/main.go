@@ -7,7 +7,7 @@ import (
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	tpl, err := ace.ParseFiles("example", "", &ace.Options{Cache: true})
+	tpl, err := ace.Load("example", "", &ace.Options{DynamicReload: true})
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
