@@ -108,7 +108,7 @@ You can discuss Ace and contact the Ace development team via the following chann
 
 ## Renderers for web frameworks
 
-* [Martini Acerender](https://github.com/yosssi/martini-acerender) - Renderer for [Martini](http://martini.codegangsta.io/)
+* [Martini Acerender](https://github.com/yosssi/martini-acerender) - For [Martini](http://martini.codegangsta.io/)
 
 ## Tools
 
