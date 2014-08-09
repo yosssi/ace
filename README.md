@@ -117,4 +117,4 @@ You can discuss Ace and contact the Ace development team via the following chann
 
 ## Projects using Ace
 
-[Here](documentation/projects-using-ace.md) is the list of the projects using Ace. Please feel free to [add](documentation/projects-using-ace.md) your awesome project!
+[Here](documentation/projects-using-ace.md) is the list of the projects using Ace. Please feel free to add your awesome project to the list!
