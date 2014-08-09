@@ -114,3 +114,7 @@ You can discuss Ace and contact the Ace development team via the following chann
 
 * [vim-ace](https://github.com/yosssi/vim-ace) - Vim syntax highlighting for Ace templates
 * [ace-tmbundle](https://github.com/yosssi/ace-tmbundle) - TextMate/Sublime syntax highlighting for Ace templates
+
+## Projects using Ace
+
+[Here](https://github.com/yosssi/ace/blob/master/documentation/projects-using-ace.md) is the list of the projects using Ace. Please feel free to add your awesome project!
