@@ -74,14 +74,14 @@ Ace has a binary template load function which loads Ace templates from binary da
 
 Please check the following documentation.
 
-* [Getting Started](https://github.com/yosssi/ace/blob/master/documentation/getting-started.md) - shows the getting started guide.
-* [Examples](https://github.com/yosssi/ace/tree/master/examples) - shows the examples of the web applications which use the Ace template engine.
+* [Getting Started](documentation/getting-started.md) - shows the getting started guide.
+* [Examples](examples) - shows the examples of the web applications which use the Ace template engine.
 
 ## Documentation
 
 You can get the documentation about Ace via the following channels:
 
-* [Documentation](https://github.com/yosssi/ace/tree/master/documentation) - includes the getting started guide and the syntax documentation.
+* [Documentation](documentation) - includes the getting started guide and the syntax documentation.
 * [GoDoc](https://godoc.org/github.com/yosssi/ace) - includes the API docuemntation.
 
 ## Official Information & Announcement
@@ -117,4 +117,4 @@ You can discuss Ace and contact the Ace development team via the following chann
 
 ## Projects using Ace
 
-[Here](https://github.com/yosssi/ace/blob/master/documentation/projects-using-ace.md) is the list of the projects using Ace. Please feel free to [add](https://github.com/yosssi/ace/edit/master/documentation/projects-using-ace.md) your awesome project!
+[Here](documentation/projects-using-ace.md) is the list of the projects using Ace. Please feel free to [add](documentation/projects-using-ace.md) your awesome project!
