@@ -1,6 +1,6 @@
 # Documentation
 
-* [Getting Started](documentation/getting-started.md)
-* [Syntax](documentation/syntax.md)
-* [Options](documentation/options.md)
-* [Projects using Ace](documentation/projects-using-ace.md)
+* [Getting Started](getting-started.md)
+* [Syntax](syntax.md)
+* [Options](options.md)
+* [Projects using Ace](projects-using-ace.md)
