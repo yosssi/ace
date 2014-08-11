@@ -11,7 +11,7 @@ type action struct {
 	elementBase
 }
 
-// Do nothing.
+// WriteTo writes data to w.
 func (e *action) WriteTo(w io.Writer) (int64, error) {
 	var bf bytes.Buffer
 
