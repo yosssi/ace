@@ -21,3 +21,4 @@ This documentation shows the examples of the web applications which use the Ace 
 * [Set a Default Value to the Yield Helper Method](set_default_value_to_the_yield_helper_method)
 * [Change the Action Delimiter](change_action_delimiter)
 * [Set Custom Functions](set_custom_functions)
+* [Cache Options](cache_options)
