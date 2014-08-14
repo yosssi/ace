@@ -82,7 +82,7 @@ Please check the following documentation.
 You can get the documentation about Ace via the following channels:
 
 * [Documentation](documentation) - includes the getting started guide and the syntax documentation.
-* [GoDoc](https://godoc.org/github.com/yosssi/ace) - includes the API docuemntation.
+* [GoDoc](https://godoc.org/github.com/yosssi/ace) - includes the API documentation.
 
 ## Official Information & Announcement
 
