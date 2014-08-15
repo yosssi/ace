@@ -32,7 +32,7 @@ type Options struct {
 	FuncMap template.FuncMap
 }
 
-// initializeOptions initializes the options
+// initializeOptions initializes the options.
 func initializeOptions(opts *Options) *Options {
 	if opts == nil {
 		opts = &Options{}
