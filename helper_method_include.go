@@ -3,6 +3,7 @@ package ace
 import (
 	"fmt"
 	"io"
+	"strings"
 )
 
 // helperMethodInclude represents a helper method include.
@@ -36,7 +37,7 @@ func newHelperMethodInclude(ln *line, rslt *result, src *source, parent element,
 	var pipeline string
 
 	if len(ln.tokens) > 3 {
-		pipeline = ln.tokens[3]
+		pipeline = strings.Join(ln.tokens[3:], space)
 	}
 
 	e := &helperMethodInclude{
