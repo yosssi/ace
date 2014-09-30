@@ -24,6 +24,17 @@ func CompileResult(name string, rslt *result, opts *Options) (*template.Template
 	// Initialize the options.
 	opts = initializeOptions(opts)
 
+	// Create a template.
+	t := template.New(name)
+
+	return CompileResultWithTemplate(t, rslt, opts)
+}
+
+// CompileResultWithTemplate compiles the parsed result and associates it with t.
+func CompileResultWithTemplate(t *template.Template, rslt *result, opts *Options) (*template.Template, error) {
+	// Initialize the options.
+	opts = initializeOptions(opts)
+
 	var err error
 
 	// Create a buffer.
@@ -62,8 +73,8 @@ func CompileResult(name string, rslt *result, opts *Options) (*template.Template
 		includeBfs[path] = bf
 	}
 
-	// Create a template.
-	t := template.New(name).Delims(opts.DelimLeft, opts.DelimRight)
+	// Set Delimiters.
+	t.Delims(opts.DelimLeft, opts.DelimRight)
 
 	// Set FuncMaps.
 	t.Funcs(template.FuncMap{
