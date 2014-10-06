@@ -131,35 +131,7 @@ func (e *htmlTag) InsertBr() bool {
 
 // setAttributes parses the tokens and set attributes to the element.
 func (e *htmlTag) setAttributes() error {
-	var parsedTokens []string
-	var unclosedTokenValues []string
-	var unclosed bool
-	var closeMark string
-
-	for i, token := range e.ln.tokens {
-		if i == 0 {
-			continue
-		}
-		if unclosed {
-			unclosedTokenValues = append(unclosedTokenValues, token)
-
-			if closed(token, closeMark) {
-				parsedTokens = append(parsedTokens, strings.Join(unclosedTokenValues, space))
-				unclosedTokenValues = make([]string, 0)
-				unclosed = false
-			}
-		} else {
-			if unclosed, closeMark = unclosedToken(token, e.opts); unclosed {
-				unclosedTokenValues = append(unclosedTokenValues, token)
-			} else {
-				parsedTokens = append(parsedTokens, token)
-			}
-		}
-	}
-
-	if unclosed {
-		parsedTokens = append(parsedTokens, unclosedTokenValues...)
-	}
+	parsedTokens := e.parseTokens()
 
 	var i int
 	var token string
@@ -297,20 +269,47 @@ func extractClasses(s string) []string {
 	return classes
 }
 
-// unclosedToken returns true if the token is unclosed.
-func unclosedToken(s string, opts *Options) (bool, string) {
-	if len(strings.Split(s, doubleQuote)) == 2 {
-		return true, doubleQuote
+// parseTokens parses the tokens and return them
+func (e *htmlTag) parseTokens() []string {
+	var inQuote bool
+	var inDelim bool
+	var tokens []string
+	var token string
+
+	str := strings.Join(e.ln.tokens[1:], space)
+	for _, chr := range str {
+		switch c := string(chr); c {
+		case space:
+			if inQuote || inDelim {
+				token += c
+			} else {
+				tokens = append(tokens, token)
+				token = ""
+			}
+		case doubleQuote:
+			if !inDelim {
+				if inQuote {
+					inQuote = false
+				} else {
+					inQuote = true
+				}
+			}
+			token += c
+		default:
+			token += c
+			if inDelim {
+				if strings.HasSuffix(token, e.opts.DelimRight) {
+					inDelim = false
+				}
+			} else {
+				if strings.HasSuffix(token, e.opts.DelimLeft) {
+					inDelim = true
+				}
+			}
+		}
 	}
-
-	if len(strings.Split(s, opts.DelimLeft)) == 2 {
-		return true, opts.DelimRight
+	if len(token) > 0 {
+		tokens = append(tokens, token)
 	}
-
-	return false, ""
-}
-
-// closedToken returns true if the token is closed.
-func closed(s string, closeMark string) bool {
-	return strings.HasSuffix(s, closeMark)
+	return tokens
 }

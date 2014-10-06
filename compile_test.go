@@ -49,6 +49,14 @@ func TestLineCompile(t *testing.T) {
 			template: "div class=\"dialog {{ if eq .Attr `important` }}color-red text-big{{end}}\" text",
 			expect: "<div class=\"dialog {{if eq .Attr `important`}}color-red text-big{{end}}\">text</div>",
 		},
+		{
+			template: "div class=\"dialog {{ if eq .Attr \"important\" }}color-red{{end}}\" text",
+			expect: "<div class=\"dialog {{if eq .Attr \"important\"}}color-red{{end}}\">text</div>",
+		},
+		{
+			template: "div class=\"dialog {{ if eq .Attr \"important\" }}color-red text-big{{end}}\" text",
+			expect: "<div class=\"dialog {{if eq .Attr \"important\"}}color-red text-big{{end}}\">text</div>",
+		},
 	} {
 		name, filepath := "dummy", "dummy.ace"
 		base := NewFile(filepath, []byte(this.template))
