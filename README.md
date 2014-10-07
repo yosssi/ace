@@ -1,7 +1,7 @@
 # Ace - HTML template engine for Go
 
 [![wercker status](https://app.wercker.com/status/8d3c657bcae7f31d10c8f88bbfa966d8/m "wercker status")](https://app.wercker.com/project/bykey/8d3c657bcae7f31d10c8f88bbfa966d8)
-[![GoDoc](https://godoc.org/github.com/yosssi/ace?status.svg)](https://godoc.org/github.com/yosssi/ace)
+[![GoDoc](http://godoc.org/github.com/yosssi/ace?status.svg)](http://godoc.org/github.com/yosssi/ace)
 
 ## Overview
 
