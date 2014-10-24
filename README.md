@@ -84,23 +84,12 @@ You can get the documentation about Ace via the following channels:
 * [Documentation](documentation) - includes the getting started guide and the syntax documentation.
 * [GoDoc](https://godoc.org/github.com/yosssi/ace) - includes the API documentation.
 
-## Official Information & Announcement
-
-You can get the official information and announcement about Ace via the following channels:
-
-* [Twitter](https://twitter.com/acehtml)
-* [Google Group](https://groups.google.com/forum/#!forum/acehtml)
-
 ## Discussion & Contact
 
 You can discuss Ace and contact the Ace development team via the following channels:
 
 * [GitHub Issues](https://github.com/yosssi/ace/issues)
-* [Google Group](https://groups.google.com/forum/#!forum/acehtml)
-* [Twitter](https://twitter.com/acehtml)
 * [Gitter (Chat)](https://gitter.im/yosssi/ace)
-* [Keiji Yoshida (Author of Ace)'s Twitter](https://twitter.com/_yosssi)
-* [Keiji Yoshida (Author of Ace)'s Email](mailto:yoshida.keiji.84@gmail.com)
 
 ## Contributions
 
