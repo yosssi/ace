@@ -43,12 +43,10 @@ func readFiles(basePath, innerPath string, opts *Options) (*source, error) {
 	// Read the inner file or load from opts.Asset.
 	var inner *File
 	if opts.Asset != nil {
-		name := filepath.Join(opts.BaseDir, innerPath+dot+opts.Extension)
-		data, err := opts.Asset(name)
+		inner, err = readFromAsset(innerPath, opts)
 		if err != nil {
 			return nil, err
 		}
-		inner = NewFile(innerPath, data)
 	} else {
 		inner, err = readFile(innerPath, opts)
 		if err != nil {
@@ -73,17 +71,25 @@ func readFiles(basePath, innerPath string, opts *Options) (*source, error) {
 
 // readFile reads a file and returns a file struct.
 func readFile(path string, opts *Options) (*File, error) {
-	var data []byte
-	var err error
-
 	if path != "" {
 		name := filepath.Join(opts.BaseDir, path+dot+opts.Extension)
-		data, err = ioutil.ReadFile(name)
+		data, err := ioutil.ReadFile(name)
 		if err != nil {
 			return nil, err
 		}
+		return NewFile(path, data), nil
+	} else {
+		return NewFile(path, nil), nil
 	}
+}
 
+// readFromAsset returns a new file struct created by reading the bytes from opts.Asset.
+func readFromAsset(path string, opts *Options) (*File, error) {
+	name := filepath.Join(opts.BaseDir, path+dot+opts.Extension)
+	data, err := opts.Asset(name)
+	if err != nil {
+		return nil, err
+	}
 	return NewFile(path, data), nil
 }
 
