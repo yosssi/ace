@@ -40,10 +40,20 @@ func readFiles(basePath, innerPath string, opts *Options) (*source, error) {
 		return nil, err
 	}
 
-	// Read the inner file.
-	inner, err := readFile(innerPath, opts)
-	if err != nil {
-		return nil, err
+	// Read the inner file or load from opts.Asset.
+	var inner *File
+	if opts.Asset != nil {
+		name := filepath.Join(opts.BaseDir, innerPath+dot+opts.Extension)
+		data, err := opts.Asset(name)
+		if err != nil {
+			return nil, err
+		}
+		inner = NewFile(innerPath, data)
+	} else {
+		inner, err = readFile(innerPath, opts)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	var includes []*File
@@ -68,13 +78,7 @@ func readFile(path string, opts *Options) (*File, error) {
 
 	if path != "" {
 		name := filepath.Join(opts.BaseDir, path+dot+opts.Extension)
-
-		if opts.Asset != nil {
-			data, err = opts.Asset(name)
-		} else {
-			data, err = ioutil.ReadFile(name)
-		}
-
+		data, err = ioutil.ReadFile(name)
 		if err != nil {
 			return nil, err
 		}
