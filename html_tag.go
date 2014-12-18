@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"sort"
 	"strings"
 )
 
@@ -78,7 +79,16 @@ func (e *htmlTag) WriteTo(w io.Writer) (int64, error) {
 	}
 	// Write attributes.
 	if len(e.attributes) > 0 {
-		for k, v := range e.attributes {
+		// to get consistent rendering, we have to sort the keys
+		var keys []string
+		for k := range e.attributes {
+			keys = append(keys, k)
+		}
+
+		sort.Strings(keys)
+
+		for _, k := range keys {
+			v := e.attributes[k]
 			bf.WriteString(space)
 			bf.WriteString(k)
 			if v != "" {
