@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"sort"
 	"strings"
 )
 
@@ -35,6 +34,12 @@ var noCloseTagNames = []string{
 	tagNameMeta,
 }
 
+// htmlAttribute represents an HTML attribute.
+type htmlAttribute struct {
+	key   string
+	value string
+}
+
 // htmlTag represents an HTML tag.
 type htmlTag struct {
 	elementBase
@@ -43,7 +48,7 @@ type htmlTag struct {
 	classes          []string
 	containPlainText bool
 	insertBr         bool
-	attributes       map[string]string
+	attributes       []htmlAttribute
 	textValue        string
 }
 
@@ -79,22 +84,14 @@ func (e *htmlTag) WriteTo(w io.Writer) (int64, error) {
 	}
 	// Write attributes.
 	if len(e.attributes) > 0 {
-		// to get consistent rendering, we have to sort the keys
-		var keys []string
-		for k := range e.attributes {
-			keys = append(keys, k)
-		}
 
-		sort.Strings(keys)
-
-		for _, k := range keys {
-			v := e.attributes[k]
+		for _, a := range e.attributes {
 			bf.WriteString(space)
-			bf.WriteString(k)
-			if v != "" {
+			bf.WriteString(a.key)
+			if a.value != "" {
 				bf.WriteString(equal)
 				bf.WriteString(doubleQuote)
-				bf.WriteString(v)
+				bf.WriteString(a.value)
 				bf.WriteString(doubleQuote)
 			}
 		}
@@ -173,7 +170,7 @@ func (e *htmlTag) setAttributes() error {
 		case attributeNameClass:
 			e.classes = append(e.classes, strings.Split(v, space)...)
 		default:
-			e.attributes[k] = v
+			e.attributes = append(e.attributes, htmlAttribute{k, v})
 		}
 	}
 
@@ -220,7 +217,7 @@ func newHTMLTag(ln *line, rslt *result, src *source, parent element, opts *Optio
 		classes:          classes,
 		containPlainText: strings.HasSuffix(s, dot),
 		insertBr:         strings.HasSuffix(s, doubleDot),
-		attributes:       make(map[string]string),
+		attributes:       make([]htmlAttribute, 0, 2),
 	}
 
 	if err := e.setAttributes(); err != nil {
