@@ -20,9 +20,11 @@ const (
 
 // Attribute names
 const (
-	attributeNameID    = "id"
-	attributeNameClass = "class"
+	attributeNameID = "id"
 )
+
+// AttributeNameClass is a variable constant.
+var AttributeNameClass = "class"
 
 // No close tag names
 var noCloseTagNames = []string{
@@ -71,7 +73,7 @@ func (e *htmlTag) WriteTo(w io.Writer) (int64, error) {
 	// Write classes.
 	if len(e.classes) > 0 {
 		bf.WriteString(space)
-		bf.WriteString(attributeNameClass)
+		bf.WriteString(AttributeNameClass)
 		bf.WriteString(equal)
 		bf.WriteString(doubleQuote)
 		for i, class := range e.classes {
@@ -167,7 +169,7 @@ func (e *htmlTag) setAttributes() error {
 				return fmt.Errorf("multiple IDs are specified [file: %s][line: %d]", e.ln.fileName(), e.ln.no)
 			}
 			e.id = v
-		case attributeNameClass:
+		case AttributeNameClass:
 			e.classes = append(e.classes, strings.Split(v, space)...)
 		default:
 			e.attributes = append(e.attributes, htmlAttribute{k, v})
