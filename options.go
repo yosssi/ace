@@ -4,9 +4,10 @@ import "html/template"
 
 // Defaults
 const (
-	defaultExtension  = "ace"
-	defaultDelimLeft  = "{{"
-	defaultDelimRight = "}}"
+	defaultExtension          = "ace"
+	defaultDelimLeft          = "{{"
+	defaultDelimRight         = "}}"
+	defaultAttributeNameClass = "class"
 )
 
 // Options represents options for the template engine.
@@ -17,6 +18,8 @@ type Options struct {
 	DelimLeft string
 	// DelimRight represents a right delimiter for the html template.
 	DelimRight string
+	// AttributeNameClass is the attribute name for classes.
+	AttributeNameClass string
 	// DynamicReload represents a flag which means whether Ace reloads
 	// templates dynamically.
 	// This option should only be true in development.
@@ -48,6 +51,10 @@ func initializeOptions(opts *Options) *Options {
 
 	if opts.DelimRight == "" {
 		opts.DelimRight = defaultDelimRight
+	}
+
+	if opts.AttributeNameClass == "" {
+		opts.AttributeNameClass = defaultAttributeNameClass
 	}
 
 	return opts
