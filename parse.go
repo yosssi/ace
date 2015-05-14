@@ -5,7 +5,7 @@ import "strings"
 // ParseSource parses the source and returns the result.
 func ParseSource(src *source, opts *Options) (*result, error) {
 	// Initialize the options.
-	opts = initializeOptions(opts)
+	opts = InitializeOptions(opts)
 
 	rslt := newResult(nil, nil, nil)
 

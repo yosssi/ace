@@ -10,6 +10,16 @@ const (
 	defaultAttributeNameClass = "class"
 )
 
+// Default NoCloseTagNames
+var defaultNoCloseTagNames = map[string]struct{}{
+	"br":    struct{}{},
+	"hr":    struct{}{},
+	"img":   struct{}{},
+	"input": struct{}{},
+	"link":  struct{}{},
+	"meta":  struct{}{},
+}
+
 // Options represents options for the template engine.
 type Options struct {
 	// Extension represents an extension of files.
@@ -20,6 +30,8 @@ type Options struct {
 	DelimRight string
 	// AttributeNameClass is the attribute name for classes.
 	AttributeNameClass string
+	// NoCloseTagNames defines a set of tags which should not be closed.
+	NoCloseTagNames map[string]struct{}
 	// DynamicReload represents a flag which means whether Ace reloads
 	// templates dynamically.
 	// This option should only be true in development.
@@ -35,8 +47,8 @@ type Options struct {
 	FuncMap template.FuncMap
 }
 
-// initializeOptions initializes the options.
-func initializeOptions(opts *Options) *Options {
+// InitializeOptions initializes the options.
+func InitializeOptions(opts *Options) *Options {
 	if opts == nil {
 		opts = &Options{}
 	}
@@ -55,6 +67,12 @@ func initializeOptions(opts *Options) *Options {
 
 	if opts.AttributeNameClass == "" {
 		opts.AttributeNameClass = defaultAttributeNameClass
+	}
+	if opts.NoCloseTagNames == nil {
+		opts.NoCloseTagNames = make(map[string]struct{}, len(defaultNoCloseTagNames))
+		for name := range defaultNoCloseTagNames {
+			opts.NoCloseTagNames[name] = struct{}{}
+		}
 	}
 
 	return opts

@@ -9,29 +9,13 @@ import (
 
 // Tag names
 const (
-	tagNameBr    = "br"
-	tagNameDiv   = "div"
-	tagNameHr    = "hr"
-	tagNameImg   = "img"
-	tagNameInput = "input"
-	tagNameLink  = "link"
-	tagNameMeta  = "meta"
+	tagNameDiv = "div"
 )
 
 // Attribute names
 const (
 	attributeNameID = "id"
 )
-
-// No close tag names
-var noCloseTagNames = []string{
-	tagNameBr,
-	tagNameHr,
-	tagNameImg,
-	tagNameInput,
-	tagNameLink,
-	tagNameMeta,
-}
 
 // htmlAttribute represents an HTML attribute.
 type htmlAttribute struct {
@@ -183,7 +167,7 @@ func (e *htmlTag) setAttributes() error {
 
 // noCloseTag returns true is the HTML tag has no close tag.
 func (e *htmlTag) noCloseTag() bool {
-	for _, name := range noCloseTagNames {
+	for name := range e.opts.NoCloseTagNames {
 		if e.tagName == name {
 			return true
 		}
