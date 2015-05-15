@@ -11,13 +11,13 @@ const (
 )
 
 // Default NoCloseTagNames
-var defaultNoCloseTagNames = map[string]struct{}{
-	"br":    struct{}{},
-	"hr":    struct{}{},
-	"img":   struct{}{},
-	"input": struct{}{},
-	"link":  struct{}{},
-	"meta":  struct{}{},
+var defaultNoCloseTagNames = []string{
+	"br",
+	"hr",
+	"img",
+	"input",
+	"link",
+	"meta",
 }
 
 // Options represents options for the template engine.
@@ -31,7 +31,7 @@ type Options struct {
 	// AttributeNameClass is the attribute name for classes.
 	AttributeNameClass string
 	// NoCloseTagNames defines a set of tags which should not be closed.
-	NoCloseTagNames map[string]struct{}
+	NoCloseTagNames []string
 	// DynamicReload represents a flag which means whether Ace reloads
 	// templates dynamically.
 	// This option should only be true in development.
@@ -69,11 +69,25 @@ func InitializeOptions(opts *Options) *Options {
 		opts.AttributeNameClass = defaultAttributeNameClass
 	}
 	if opts.NoCloseTagNames == nil {
-		opts.NoCloseTagNames = make(map[string]struct{}, len(defaultNoCloseTagNames))
-		for name := range defaultNoCloseTagNames {
-			opts.NoCloseTagNames[name] = struct{}{}
-		}
+		opts.NoCloseTagNames = make([]string, len(defaultNoCloseTagNames))
+		copy(opts.NoCloseTagNames, defaultNoCloseTagNames)
 	}
 
 	return opts
+}
+
+// AddNoCloseTagName appends name to .NoCloseTagNames set.
+func (opts *Options) AddNoCloseTagName(name string) {
+	opts.NoCloseTagNames = append(opts.NoCloseTagNames, name)
+}
+
+// DeleteNoCloseTagName deletes name from .NoCloseTagNames set.
+func (opts *Options) DeleteNoCloseTagName(name string) {
+	var newset []string
+	for _, n := range opts.NoCloseTagNames {
+		if n != name {
+			newset = append(newset, n)
+		}
+	}
+	opts.NoCloseTagNames = newset
 }

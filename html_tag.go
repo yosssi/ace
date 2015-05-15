@@ -167,7 +167,7 @@ func (e *htmlTag) setAttributes() error {
 
 // noCloseTag returns true is the HTML tag has no close tag.
 func (e *htmlTag) noCloseTag() bool {
-	for name := range e.opts.NoCloseTagNames {
+	for _, name := range e.opts.NoCloseTagNames {
 		if e.tagName == name {
 			return true
 		}
