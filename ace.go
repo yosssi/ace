@@ -12,7 +12,7 @@ var cacheMutex = new(sync.RWMutex)
 // and cached if the "DynamicReload" option are not set.
 func Load(basePath, innerPath string, opts *Options) (*template.Template, error) {
 	// Initialize the options.
-	opts = initializeOptions(opts)
+	opts = InitializeOptions(opts)
 
 	name := basePath + colon + innerPath
 

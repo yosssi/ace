@@ -22,7 +22,7 @@ const (
 // CompileResult compiles the parsed result to the template.Template.
 func CompileResult(name string, rslt *result, opts *Options) (*template.Template, error) {
 	// Initialize the options.
-	opts = initializeOptions(opts)
+	opts = InitializeOptions(opts)
 
 	// Create a template.
 	t := template.New(name)
@@ -33,7 +33,7 @@ func CompileResult(name string, rslt *result, opts *Options) (*template.Template
 // CompileResultWithTemplate compiles the parsed result and associates it with t.
 func CompileResultWithTemplate(t *template.Template, rslt *result, opts *Options) (*template.Template, error) {
 	// Initialize the options.
-	opts = initializeOptions(opts)
+	opts = InitializeOptions(opts)
 
 	var err error
 
