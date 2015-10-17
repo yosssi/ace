@@ -1,0 +1,38 @@
+= doctype html
+html lang=en
+  head
+    meta charset=utf-8
+    title External CSS and JS
+
+    link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+
+  body
+    div.container
+      h1.
+        External CSS and JS
+
+      div.row
+        div.col-xs-12
+          label
+            input#completed-css disabled="disabled" type="checkbox"
+            span Load CSS from external source
+      div.row
+        div.col-xs-12
+          label
+            input#completed-js disabled="disabled" type="checkbox"
+            span Load JS from external source
+
+    script src="http://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"
+
+    = javascript
+      // verification that we are using downloaded javascript
+      window.onload = function() {
+        if (jQuery !== undefined) {
+          document.getElementById("completed-js").checked = true;
+        }
+        for (var i = 0; i < document.styleSheets.length; ++i) {
+          if (document.styleSheets[i].href.indexOf("bootstrap.min.css") !== -1) {
+            document.getElementById("completed-css").checked = true;
+          }
+        }
+      };
