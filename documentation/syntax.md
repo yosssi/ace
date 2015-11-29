@@ -315,7 +315,7 @@ The following functions are predefined.
 
 ### HTML function
 
-HTML function returns a non-escaped stirng.
+HTML function returns a non-escaped string.
 
 ```ace
 {{"<div>"}}
