@@ -318,8 +318,8 @@ The following functions are predefined.
 HTML function returns a non-escaped string.
 
 ```ace
-{{"<div>"}}
-{{HTML "<div>"}}
+{{"<br>"}}
+{{HTML "<br>"}}
 ```
 
 becomes
