@@ -30,6 +30,13 @@ func (e *action) WriteTo(w io.Writer) (int64, error) {
 
 }
 
+func (e *action) IsBlockElement() bool {
+	return e.parent.IsBlockElement()
+}
+func (e *action) IsControlElement() bool {
+	return true
+}
+
 // newAction creates and returns an action.
 func newAction(ln *line, rslt *result, src *source, parent element, opts *Options) *action {
 	return &action{

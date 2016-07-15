@@ -25,6 +25,8 @@ type element interface {
 	CanHaveChildren() bool
 	InsertBr() bool
 	SetLastChild(lastChild bool)
+	IsBlockElement() bool
+	IsControlElement() bool
 }
 
 // newElement creates and returns an element.

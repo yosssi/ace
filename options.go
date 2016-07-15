@@ -38,6 +38,9 @@ type Options struct {
 	DynamicReload bool
 	// BaseDir represents a base directory of the Ace templates.
 	BaseDir string
+	// Indent string used for indentation.
+	Indent    string
+	formatter outputFormatter
 	// Asset loads and returns the asset for the given name.
 	// If this function is set, Ace load the template data from
 	// this function instead of the template files.
@@ -71,6 +74,10 @@ func InitializeOptions(opts *Options) *Options {
 	if opts.NoCloseTagNames == nil {
 		opts.NoCloseTagNames = make([]string, len(defaultNoCloseTagNames))
 		copy(opts.NoCloseTagNames, defaultNoCloseTagNames)
+	}
+
+	if opts.Indent != "" {
+		opts.formatter = newFormatter(opts.Indent)
 	}
 
 	return opts

@@ -38,6 +38,10 @@ func (e *helperMethodContent) WriteTo(w io.Writer) (int64, error) {
 	return int64(i), err
 }
 
+func (e *helperMethodContent) IsBlockElement() bool {
+	return true
+}
+
 // newHelperMethodContent creates and returns a helper method content.
 func newHelperMethodContent(ln *line, rslt *result, src *source, parent element, opts *Options) (*helperMethodContent, error) {
 	if len(ln.tokens) < 3 || ln.tokens[2] == "" {

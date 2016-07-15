@@ -36,6 +36,12 @@ func (e *elementBase) Base() *elementBase {
 func (e *elementBase) CanHaveChildren() bool {
 	return true
 }
+func (e *elementBase) IsBlockElement() bool {
+	return false
+}
+func (e *elementBase) IsControlElement() bool {
+	return false
+}
 
 // InsertBr returns false.
 // This method should be overrided by a struct which contains
@@ -57,6 +63,11 @@ func (e *elementBase) writeChildren(bf *bytes.Buffer) (int64, error) {
 			child.SetLastChild(true)
 		}
 
+		if e.opts.formatter != nil {
+			if i, err := e.opts.formatter.OpeningElement(bf, child); err != nil {
+				return int64(i), err
+			}
+		}
 		if i, err := child.WriteTo(bf); err != nil {
 			return int64(i), err
 		}
