@@ -65,7 +65,7 @@ func (l *line) fileName() string {
 	return l.file.path + dot + l.opts.Extension
 }
 
-// childOf returns true is the line is a child of the element.
+// childOf returns true if the line is a child of the element.
 func (l *line) childOf(parent element) (bool, error) {
 	var ok bool
 	var err error

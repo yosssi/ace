@@ -17,6 +17,41 @@ const (
 	attributeNameID = "id"
 )
 
+var inlineElements = map[string]bool{
+	"b":        true,
+	"big":      true,
+	"i":        true,
+	"small":    true,
+	"tt":       true,
+	"abbr":     true,
+	"acronym":  true,
+	"cite":     true,
+	"code":     true,
+	"dfn":      true,
+	"em":       true,
+	"kbd":      true,
+	"strong":   true,
+	"samp":     true,
+	"time":     true,
+	"var":      true,
+	"a":        true,
+	"bdo":      true,
+	"br":       true,
+	"img":      true,
+	"map":      true,
+	"object":   true,
+	"q":        true,
+	"script":   true,
+	"span":     true,
+	"sub":      true,
+	"sup":      true,
+	"button":   true,
+	"input":    true,
+	"label":    true,
+	"select":   true,
+	"textarea": true,
+}
+
 // htmlAttribute represents an HTML attribute.
 type htmlAttribute struct {
 	key   string
@@ -83,6 +118,9 @@ func (e *htmlTag) WriteTo(w io.Writer) (int64, error) {
 
 	// Write a text value
 	if e.textValue != "" {
+		if e.opts.formatter != nil {
+			e.opts.formatter.WritingTextValue(&bf, e)
+		}
 		bf.WriteString(e.textValue)
 	}
 
@@ -97,6 +135,9 @@ func (e *htmlTag) WriteTo(w io.Writer) (int64, error) {
 
 	// Write a close tag.
 	if !e.noCloseTag() {
+		if e.opts.formatter != nil {
+			e.opts.formatter.ClosingElement(&bf, e)
+		}
 		bf.WriteString(lt)
 		bf.WriteString(slash)
 		bf.WriteString(e.tagName)
@@ -174,6 +215,15 @@ func (e *htmlTag) noCloseTag() bool {
 	}
 
 	return false
+}
+
+// true if the element is inline one
+func (e *htmlTag) IsBlockElement() bool {
+	if inline, found := inlineElements[e.tagName]; found {
+		return !inline
+	} else {
+		return true
+	}
 }
 
 // newHTMLTag creates and returns an HTML tag.
