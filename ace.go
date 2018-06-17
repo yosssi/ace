@@ -64,7 +64,7 @@ func setCache(name string, tpl template.Template) {
 
 // FlushCache clears all cached templates.
 func FlushCache() {
-       cacheMutex.Lock()
-       cache = make(map[string]template.Template)
-       cacheMutex.Unlock()
+	cacheMutex.Lock()
+	cache = make(map[string]template.Template)
+	cacheMutex.Unlock()
 }
